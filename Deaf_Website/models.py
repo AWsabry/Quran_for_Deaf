@@ -48,7 +48,7 @@ class Category(models.Model):
 class UploadedVideo(models.Model):
     name = models.CharField(max_length=250, blank=True)
     slug = models.SlugField(unique=True, db_index=True)
-    video = models.FileField(upload_to="Deaf_Signs", blank=True)
+    video = models.FileField(upload_to="Videos/Deaf_Signs", blank=True)
     category = models.ForeignKey(Category, on_delete=models.PROTECT)
     description = models.TextField(blank=True)
     active = models.BooleanField(default=True)
@@ -58,7 +58,81 @@ class UploadedVideo(models.Model):
     NegativeFeedBack = models.IntegerField(default=0, null=True)
 
     class Meta:
-        verbose_name_plural = "UploadedVideos"
+        verbose_name_plural = "Uploaded Videos"
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return f"{self.name}"
+
+
+class UploadedImage(models.Model):
+    name = models.CharField(max_length=250, blank=True)
+    slug = models.SlugField(unique=True, db_index=True)
+    image = models.ImageField(upload_to="Images/Deaf_Signs", blank=True)
+    category = models.ForeignKey(Category, on_delete=models.PROTECT)
+    description = models.TextField(blank=True)
+    active = models.BooleanField(default=True)
+    created = models.DateTimeField(auto_now_add=True)
+    counter = models.IntegerField(default=0, null=True)
+    PositiveFeedBack = models.IntegerField(default=0, null=True)
+    NegativeFeedBack = models.IntegerField(default=0, null=True)
+
+    class Meta:
+        verbose_name_plural = "Uploaded Images"
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return f"{self.name}"
+
+
+
+class PendingUploads(models.Model):
+    name = models.CharField(max_length=250, blank=True)
+    slug = models.SlugField(unique=True, db_index=True)
+    image = models.ImageField(upload_to="Images/Deaf_Signs", blank=True)
+    video = models.FileField(upload_to="Videos/Deaf_Signs", blank=True)
+    category = models.ForeignKey(Category, on_delete=models.PROTECT)
+    description = models.TextField(blank=True)
+    active = models.BooleanField(default=False)
+    created = models.DateTimeField(auto_now_add=True)
+    counter = models.IntegerField(default=0, null=True)
+    PositiveFeedBack = models.IntegerField(default=0, null=True)
+    NegativeFeedBack = models.IntegerField(default=0, null=True)
+    Confrimed = models.BooleanField(default=False)
+
+    class Meta:
+        verbose_name_plural = "Pending Uploads"
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return f"{self.name}"
+    
+
+
+class Results(models.Model):
+    name = models.ForeignKey(PendingUploads,on_delete=models.PROTECT)
+    slug = models.SlugField(unique=True, db_index=True)
+    image = models.ImageField(upload_to="Images/Deaf_Signs", blank=True)
+    video = models.FileField(upload_to="Videos/Deaf_Signs", blank=True)
+    category = models.ForeignKey(Category, on_delete=models.PROTECT)
+    description = models.TextField(blank=True)
+    active = models.BooleanField(default=True)
+    created = models.DateTimeField(auto_now_add=True)
+    counter = models.IntegerField(default=0, null=True)
+    PositiveFeedBack = models.IntegerField(default=0, null=True)
+    NegativeFeedBack = models.IntegerField(default=0, null=True)
+    addtoVideosClass =  models.BooleanField(default=False)
+    addtoImagesClass =  models.BooleanField(default=False)
+    Confrimed = models.BooleanField(default=False)
+
+    class Meta:
+        verbose_name_plural = "Results"
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)

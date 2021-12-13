@@ -1,0 +1,47 @@
+{% extends 'base/auth_base.html' %}
+
+{% block main_content %}
+<div class="signUp-page signUp-minimal pt-50 pb-100">
+    <div class="shape-wrapper">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div> <!-- /.shape-wrapper -->
+    <div class="signin-form-wrapper">
+        <div class="title-area text-center">
+            <h3>Login.</h3>
+        </div> <!-- /.title-area -->
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-{{message.tags}}" role="alert">
+            {{message}}
+        </div>
+        {% endfor %}
+        {% endif %}
+        <form method='POST' id="login-form">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-12">
+                    <div class="input-group">
+                        <input type="email" name="email" required>
+                        <label>Email</label>
+                    </div> <!-- /.input-group -->
+                </div> <!-- /.col- -->
+                <div class="col-12">
+                    <div class="input-group">
+                        <input type="password" name="password" required>
+                        <label>Password</label>
+                    </div> <!-- /.input-group -->
+                </div> <!-- /.col- -->
+            </div> <!-- /.row -->
+            <div class="agreement-checkbox d-flex justify-content-between align-items-center">
+                <a href="{% url 'password_reset' %}">Forget Password?</a>
+            </div>
+            <button class="line-button-one" name="login_btn">Login</button>
+        </form>
+        <p class="signUp-text text-center">Don’t have any account? <a href="{% url 'signup' %}">Sign up</a> now.</p>
+    </div> <!-- /.sign-up-form-wrapper -->
+</div> <!-- /.signUp-page -->
+{% endblock main_content %}

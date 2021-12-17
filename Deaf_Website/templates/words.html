@@ -1,0 +1,184 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<!-- Element Style -->
+<div class="breadcrumbs-three b-wh-text mb-5" style="background-image: url({% static 'images/pray.svg' %}); background-position-x: center;">
+    <div class="container">
+        <h2 class="page-title">Breadcrumbs</h2>
+        <ul class="page-breadcrumbs">
+            <li><a href="index.html">Home</a></li>
+            <li><i class="fa fa-angle-left" aria-hidden="true"></i></li>
+            <li>Breadcrumbs</li>
+        </ul>
+    </div> <!-- /.container -->
+</div> <!-- /.breadcrumbs-three -->
+
+<!-- Element Style -->
+<div class="element-section mb-20">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg">
+                <!-- The value of data-role should be z-tabs, data-options is optional to set options -->
+                <div id='theme-tab-seven' style="display:grid; grid-template-areas: '. filter' 'nav content' '. pagination'; grid-column-gap: 10px; grid-template-columns: min-content auto;" class="theme-tab-solid icon-style theme-tab tab-resp" data-role='z-tabs' data-options='{"theme": "silver", "orientation": "vertical", "animation": {"duration": 400, "effects": "slideV"}}'>
+                    <!-- Tab Navigation Menu -->
+                    <ul class="tabs-menu clearfix" style="grid-area: nav;">
+                        <li><a>Graphics</a></li>
+                        <li><a>Design</a></li>
+                        <li><a>Photos</a></li>
+                        <li><a>Themes</a></li>
+                    </ul>
+
+                    <!-- Content container -->
+                    <div class="content-main">
+                        <!-- Graphics -->
+                        <div class="z-content-pad">
+                            <div class="nested-tab" data-role='z-tabs' data-options='{"theme": "silver", "orientation": "horizontal", "animation": {"duration": 400, "effects": "slideV"}}'>
+
+                                <!-- Nested Tab Navigation Menu -->
+                                <ul class="nested-tab-menu clearfix">
+                                    <li><a>Vidoes</a></li>
+                                    <li><a>Photos</a></li>
+                                </ul>
+                                <div>
+                                    <div>
+                                        <div class="our-blog">
+                                            <div class="single-blog-post">
+                                                <div class="img-holder">
+                                                    <img src="{% static 'images/blog/13.jpg' %}" alt="">
+                                                    <a data-fancybox href="https://www.youtube.com/embed/aXFSJTjVjw0" class="fancybox video-button"><i class="flaticon-play-button-2"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="element-section">
+                                            <div class="our-project project-minimal-style">
+                                                <div class="inner-wrapper">
+                                                    <div class="project-minimal-slider">
+                                                        <div class="item">
+                                                            <div class="project-item">
+                                                                <div class="img-box"><img src="{% static 'images/shop/2.jpg'%}" alt=""></div>
+                                                                <div class="hover-valina">
+                                                                    <div>
+                                                                        <a href="{% static 'images/shop/2.jpg'%}" class="zoom fancybox" data-fancybox="gallery"><img src="{% static 'images/icon/zoom-in.svg'%}" alt="" class="svg"></a>
+                                                                    </div>
+                                                                </div> <!-- /.hover-valina -->
+                                                            </div> <!-- /.project-item -->
+                                                        </div> <!-- /.item -->
+                                                        <div class="item">
+                                                            <div class="project-item">
+                                                                <div class="img-box"><img src="{% static 'images/shop/2.jpg'%}" alt=""></div>
+                                                                <div class="hover-valina">
+                                                                    <div>
+                                                                        <a href="{% static 'images/shop/2.jpg'%}" class="zoom fancybox" data-fancybox="gallery"><img src="{% static 'images/icon/zoom-in.svg'%}" alt="" class="svg"></a>
+                                                                    </div>
+                                                                </div> <!-- /.hover-valina -->
+                                                            </div> <!-- /.project-item -->
+                                                        </div> <!-- /.item -->
+                                                        <!-- /.project-minimal-slider -->
+                                                    </div> <!-- /.inner-wrapper -->
+                                                </div> <!-- /.our-project -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="z-content-pad">
+                            <div class="nested-tab" data-role='z-tabs' data-options='{"theme": "silver", "orientation": "horizontal", "animation": {"duration": 400, "effects": "slideV"}}'>
+
+                                <!-- Nested Tab Navigation Menu -->
+                                <ul class="nested-tab-menu clearfix">
+                                    <li><a>Vidoes</a></li>
+                                    <li><a>Photos</a></li>
+                                </ul>
+                                <div>
+                                    <div>
+                                        <h5>Logo</h5>
+                                        <p>After a thorough review of a client’s circumstances and needs, our advisory team constructs an in-depth, actionable plan to address targeted goals.</p>
+                                    </div>
+                                    <div>
+                                        <h5>Print</h5>
+                                        <p>Rockefeller & Co. takes a long-term approach to wealth planning. While some individuals, families, family offices, foundations, endowments</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="z-content-pad">
+                            <div class="nested-tab" data-role='z-tabs' data-options='{"theme": "silver", "orientation": "horizontal", "animation": {"duration": 400, "effects": "slideV"}}'>
+
+                                <!-- Nested Tab Navigation Menu -->
+                                <ul class="nested-tab-menu clearfix">
+                                    <li><a>Vidoes</a></li>
+                                    <li><a>Photos</a></li>
+                                </ul>
+                                <div>
+                                    <div>
+                                        <h5>Logo</h5>
+                                        <p>After a thorough review of a client’s circumstances and needs, our advisory team constructs an in-depth, actionable plan to address targeted goals.</p>
+                                    </div>
+                                    <div>
+                                        <h5>Print</h5>
+                                        <p>Rockefeller & Co. takes a long-term approach to wealth planning. While some individuals, families, family offices, foundations, endowments</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="z-content-pad">
+                            <div class="nested-tab" data-role='z-tabs' data-options='{"theme": "silver", "orientation": "horizontal", "animation": {"duration": 400, "effects": "slideV"}}'>
+
+                                <!-- Nested Tab Navigation Menu -->
+                                <ul class="nested-tab-menu clearfix">
+                                    <li><a>Vidoes</a></li>
+                                    <li><a>Photos</a></li>
+                                </ul>
+                                <div>
+                                    <div>
+                                        <h5>Logo</h5>
+                                        <p>After a thorough review of a client’s circumstances and needs, our advisory team constructs an in-depth, actionable plan to address targeted goals.</p>
+                                    </div>
+                                    <div>
+                                        <h5>Print</h5>
+                                        <p>Rockefeller & Co. takes a long-term approach to wealth planning. While some individuals, families, family offices, foundations, endowments</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <span class="theme-sidebar-widget" style="grid-area:filter; margin-bottom: 30px; display:flex; justify-content:space-between">
+                        <form action="#" class="sidebar-search">
+                            <input type="text" placeholder="Search" style="min-width: 200px;">
+                            <button><i class="fa fa-search" aria-hidden="true"></i></button>
+                        </form>
+                        <div class="dropdown show">
+                            <button class="drop-btn btn btn-white dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                              10
+                            </button>
+                            <div class="dropdown-menu dropdownMenu" aria-labelledby="dropdownMenuButton" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(971px, 48px, 0px);">
+                              <a class="dropdown-item" href="#">Action</a>
+                              <a class="dropdown-item" href="#">Another action</a>
+                              <a class="dropdown-item" href="#">Something else here</a>
+                            </div>
+                        </div>
+                    </span>
+                    <!-- Element Style -->
+                    <span class="element-section pagination">
+                        <div class="container">
+                            <div class="pd-footer d-md-flex justify-content-between align-items-center pt-15">
+                                <a href="#" class="theme-pager prev"><span class="flaticon-next"></span> &nbsp;&nbsp;Previous</a>
+                                <a href="#" class="theme-pager next">Next &nbsp;&nbsp;<span class="flaticon-back"></span></a>
+                            </div>
+                        </div>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+

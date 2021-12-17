@@ -16,6 +16,12 @@ class CustomUserManager(BaseUserManager):
     Custom user model manager where email is the unique identifiers
     for authentication instead of usernames.
     """
+    def get_by_natural_key(self, username):
+        """
+        To make email login case sensetive.
+        """
+        
+        return self.get(email__iexact=username)
 
     def create_user(self, email, password, first_name, last_name, **extra_fields):
         """

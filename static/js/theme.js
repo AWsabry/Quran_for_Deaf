@@ -614,28 +614,26 @@
               var mcpSlider = $ (".project-minimal-slider");
                 if(mcpSlider.length) {
                     mcpSlider.owlCarousel({
+                      autoHeight: true,
                       rtl:true,
-                      loop:true,
                       nav:true,
                       navText: ["<i class='flaticon-back'></i>" , "<i class='flaticon-next'></i>"],
                       dots:false,
-                      autoplay:true,
-                      margin:45,
-                      autoplayTimeout:4500,
-                      autoplaySpeed:1000,
+                      margin:40,
                       lazyLoad:true,
                       singleItem:true,
-                      center:true,
                       responsive:{
                           0:{
-                              items:1
+                              margin:15,
+                              items:1,
                           },
                           768:{
-                              items:2
+                              margin:25,
+                              items:2,
                           },
                           1200:{
-                              items:3
-                          }
+                            items:2,
+                        }
                       }
                   });
                 }

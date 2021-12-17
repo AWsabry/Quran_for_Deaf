@@ -14,6 +14,8 @@ from users.utils import AccessTokenGenerator
 from users.thread import EmailThread
 from django.utils.translation import gettext as _
 from django.contrib.auth.models import Group
+from django.views.decorators.csrf import csrf_exempt
+from django.core.mail import EmailMessage
 
 # Create your views here.
 
@@ -41,12 +43,14 @@ def send_activate_mail(request, user):
                 'domain':domain,
                 'token':token,
             })
-            EmailThread(subject, body, [user.email]).start()
+            email = EmailMessage(subject, body, settings.EMAIL_HOST_USER, [user.email])
+            email.send()
+            # EmailThread(subject, body, [user.email]).start()
             messages.success(request, _('There are an mail has been sent.'))
         else:
             messages.error(request,_('Please varify the account (an email have been sent) please wait %(time_tosend)8.0f') % {'time_tosend':time_tosend} , extra_tags='danger')
 
-
+@csrf_exempt
 def signup(request):
     if request.method == 'POST':
         form = CustomUserForm(request.POST)
@@ -72,15 +76,16 @@ def signup(request):
         
     return render(request, 'sign_up.html', {'form':form})
 
+@csrf_exempt
 def login(request):
     if request.method == 'POST' and 'login_btn' in request.POST:
-        email = request.POST.get('email').lower()
+        email = request.POST.get('email')
         password = request.POST.get('password')
         user = authenticate(request, email=email, password=password)
         if user:
             if user.is_active:
                 print('active')
-                return redirect('home')
+                return redirect('index')
             else:
                 send_activate_mail(request, user)
                 return redirect('login')
@@ -91,12 +96,17 @@ def login(request):
 
 def activate_user(request, token):
     token = AccessToken.objects.filter(token=token).first()
-    last_token = AccessToken.objects.filter(user=token.user, expires__gt=timezone.now()).first()
+    
+    if token:
+        last_token = AccessToken.objects.filter(user=token.user, expires__gt=timezone.now()).first()
+        
+        if last_token == token:
+            
+            if AccessTokenGenerator().check_token(token.user, token.token):       
+                token.user.is_active = True
+                token.user.save()
+                return HttpResponse('activated')
+            return HttpResponse('already activated')
+        return HttpResponse('timeout')
 
-    if last_token == token:
-        if AccessTokenGenerator().check_token(token.user, token.token):       
-            token.user.is_active = True
-            token.user.save()
-            return HttpResponse('activated')
-        return HttpResponse('already activated')
-    return HttpResponse('timeout')
+    return  HttpResponse('None found token')

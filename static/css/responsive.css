@@ -395,6 +395,7 @@
 
 
 @media (max-width: 767px) {
+  .tab-resp {grid-template-areas: 'filter filter' 'nav content' '. pagination' !important;}
   .pt-150 {padding-top: 100px;} .pb-200 {padding-bottom: 150px;} .mt-200 {margin-top: 150px;}
   #theme-banner-one .illustration,.agn-contact-banner .title br {display: none;}
   .theme-title-one .main-title,.agn-contact-banner .title,#theme-banner-four .main-wrapper .main-title,#theme-banner-five .main-title,
@@ -527,6 +528,7 @@
 /*(max-width: 767px)*/
 
 @media (min-width: 576px) and (max-width: 767px) {
+  .tab-resp {grid-template-areas: 'filter filter' 'nav content' 'pagination pagination' !important;}
   .agn-counter-section .counter-wrapper .single-counter-box .number {font-size: 45px;}
   .project-details .project-info span {font-size: 18px;}
   .contact-minimal .inner-wrapper .contact-form {max-width: 540px;margin: 0 auto;}
@@ -534,6 +536,7 @@
 /*(min-width: 576px) and (max-width: 767px)*/
 
 @media (max-width: 575px) {
+  .tab-resp {grid-template-areas: 'filter filter' 'nav content' 'pagination pagination' !important;}
   #theme-banner-one .main-wrapper {padding-top: 170px;}
   #theme-banner-one .main-wrapper .main-title,#theme-banner-two .main-title,.seo-work-progress .single-work-list .text-wrapper .title,
   .seo-contact-banner .title {font-size: 48px;line-height: 60px;}
@@ -644,7 +647,8 @@
 /*(max-width: 575px)*/
 
 
-@media (max-width: 500px) {
+@media (max-width: 480px) {
+  .tab-resp {grid-template-areas: 'filter filter' 'mobile mobile' 'nav nav' 'content content' 'pagination pagination' !important;}
   .theme-tab-basic .z-content-inner {padding-top: 30px;}
   .theme-tab .z-container {border: none;}
   .theme-tab-basic.theme-tab .tabs-menu li a:before {bottom: 0;height: 1px;}
@@ -660,12 +664,14 @@
 }
 
 @media (max-width: 430px) {
+  .tab-resp {grid-template-areas: 'filter filter' 'mobile mobile' 'nav nav' 'content content' 'pagination pagination' !important;}
   .theme-menu-one .contact-us {display: none;}
   .theme-menu-two .quote-button {width: 135px;left: 90px;}
   .shop-details .procuct-details .product-info .wishlist-button {display: block;margin-top: 15px;}
   .op-footer-one .bottom-text ul li {float: none;}
 }
 @media (max-width: 350px) {
+  .tab-resp {grid-template-areas: 'filter filter' 'mobile mobile' 'nav nav' 'content content' 'pagination pagination' !important;}
   #isotop-gallery-wrapper .isotop-item .hover-jojo>div p {display: none;}
   .team-minimal .single-team-member .img-box {width: 250px;height: 250px;}
 }

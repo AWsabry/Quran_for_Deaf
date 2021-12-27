@@ -134,6 +134,10 @@
 @import url('../vendor/mega-menu/assets/css/menu.css');
 /*----font awesome -------*/
 @import url('../fonts/font-awesome/css/font-awesome.min.css');
+/*----font awesome -------*/
+@import url('../fonts/fontawesome-free-5.15.4-web/css/fontawesome.min.css');
+@import url('../fonts/fontawesome-free-5.15.4-web/css/all.css');
+@import url('../fonts/fontawesome-free-5.15.4-web/css/all.min.css');
 /*----owl-carousel css----*/
 @import url('../vendor/owl-carousel/owl.carousel.css');
 @import url('../vendor/owl-carousel/owl.theme.css');
@@ -159,7 +163,6 @@
 /*--------- Tabs ---------*/
 @import url('../vendor/tabs/tabs.css');
 
-
 /*** 
 
 ====================================================================
@@ -171,6 +174,19 @@
 
 .clear_fix{
   clear: both;
+}
+
+.cont-preloader{
+  align-items: center;
+  -webkit-align-items: center;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  -webkit-justify-content: center;
+  left: 0;
+  top: 0;
+  width: 100%;
+  background: #fff;
 }
 
 .ctn-preloader {
@@ -217,10 +233,13 @@
   line-height: 70px;
   position: absolute;
 }
+.letters-loading-small:before{
+  line-height: unset !important;
+  position: relative !important;
+}
 .ctn-preloader .animation-preloader .txt-loading .letters-loading {
   font-family: 'Lato', sans-serif;
   font-weight: 700;
-  letter-spacing: 15px;
   display: inline-block;
   color: rgba(255, 57, 70, 0.15);
   position: relative;
@@ -277,7 +296,7 @@
     height: 7em;
     width: 7em;
   }
-  .ctn-preloader .animation-preloader .txt-loading .letters-loading {font-size: 40px; letter-spacing: 10px;}
+  .ctn-preloader .animation-preloader .txt-loading .letters-loading {font-size: 40px;}
 }
 
 /*==================== Click Top ====================*/
@@ -308,14 +327,20 @@
 }
 /*______________________ Global style ___________________*/
 
- @font-face {
+@font-face {
   font-family: 'font-awesome';
-  src: url('../fonts/font-awesome/fonts/fontawesome-webfont.ttf');
-  src: url('../fonts/font-awesome/fonts/fontawesome-webfont.eot'), /* IE9 Compat Modes */
-       url('../fonts/font-awesome/fonts/fontawesome-webfont.woff2') format('woff2'), /* Super Modern Browsers */
-       url('../fonts/font-awesome/fonts/fontawesome-webfont.woff') format('woff'), /* Pretty Modern Browsers */
-       url('../fonts/font-awesome/fonts/fontawesome-webfont.svg') format('svg'); /* Legacy iOS */
- }
+  src: url('../fonts/fontawesome-free-5.15.4-web/fonts/fa-regular-400.ttf');
+  src: url('../fonts/fontawesome-free-5.15.4-web/fonts/fa-regular-400.eot'), /* IE9 Compat Modes */
+        url('../fonts/fontawesome-free-5.15.4-web/fonts/fa-regular-400.woff2') format('woff2'), /* Super Modern Browsers */
+        url('../fonts/fontawesome-free-5.15.4-web/fonts/fa-regular-400.woff') format('woff'), /* Pretty Modern Browsers */
+        url('../fonts/fontawesome-free-5.15.4-web/fonts/fa-regular-400.svg') format('svg'); /* Legacy iOS */
+}
+
+@font-face {
+  font-family: 'tajawal';
+  src: url('../fonts/Tajawal-Light.ttf');
+}
+
  html {direction: rtl;}
  body {
   font-family: 'Lato', sans-serif;
@@ -6814,6 +6839,40 @@ font-weight:600;text-decoration: underline;}
   top:50%;
   margin-top: -27px;
 }
+.owl-height{
+  height: auto !important;
+}
+.notFound{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  padding: 3vw 0;
+}
+.notFound i{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 120px;
+  width: 120px;
+  font-size: 100px;
+  padding: 10px;
+  background-color: #dc354524;
+  color: #dc3545;
+  margin-bottom: 15px;
+  border-radius: 50%;
+}
+.notFound h3{
+  color: #3B3B3B;
+  font-size: 2vw;
+}
+.img-box-url{
+  height: 20vw;
+  width: auto;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 .project-minimal-style .owl-theme .owl-nav .owl-prev {left: -35px;}
 .project-minimal-style .owl-theme .owl-nav .owl-next {right: -35px;}
 .project-minimal-style .share-icon {text-align: left;padding-top: 60px;}
@@ -8590,6 +8649,9 @@ Modal animation
   margin-bottom: 15px;
   position: relative;
 }
+.z-content-inner{
+  background: #f9f9f9 !important;
+}
 .theme-tab .z-content-inner .list-item li:before {
   content: '';
   position: absolute;
@@ -8598,6 +8660,17 @@ Modal animation
   border-radius: 50%;
   right:0;
   top:10px;
+}
+.dropdownMenu > button {
+  display: flex;
+  align-items: center;
+  color: #a9a9a9;
+}
+.dropdownMenu > button i {
+  margin-left: 10px;
+}
+.dropdownMenu > button:hover{
+  opacity: 0.5;
 }
 .theme-tab .z-content-inner ol {margin: 10px 0 0;padding-left: 22px;}
 .theme-tab .z-content-inner ol li a {

@@ -1,33 +1,29 @@
 from django.contrib import admin
 
-from Deaf_Website.models import Category, TeacherProfile, UploadedVideo
+from Deaf_Website.models import Word, WordUser
 
 # Register your models here.
 
-
-class CategoryAdmin(admin.ModelAdmin):
-    prepopulated_fields = {'slug': ('name',), }
-    list_filter = ("name", "created", "brand")
-    list_display = ('name', "created", "id", 'brand','active')
+@admin.register(Word)
+class WordAdmin(admin.ModelAdmin):
+    model = Word
+    list_display = ('id','name', 'slug' , 'active', 'created')
+    list_display_links = ('name',)
+    list_filter = ('name', 'slug' , 'active', 'created')
+    list_editable = ('active',)
+    fieldsets = (
+        (None, {"fields": (
+                'user', 'name', 'slug', 'description', 'image', 'video', 'active', 'updated', 'created'
+            )})),
+        
+    def get_readonly_fields(self, request, obj=None):
+        if request.user.is_superuser or request.user == obj.user:
+            return self.readonly_fields + ('slug', 'updated', 'created')
+        else:
+            return self.readonly_fields + ('user', 'name', 'slug', 'description', 'image', 'video', 'active', 'updated', 'created')        
+        
+        return self.readonly_fields
     
-class UploadedVideoAdmin(admin.ModelAdmin):
-    prepopulated_fields = {'slug': ('name',), }
-    list_filter = ("name", "created",)
-    list_display = ('name', "category", "id", 'created','PositiveFeedBack','NegativeFeedBack','active')
-
-
-class TeacherProfileAdmin(admin.ModelAdmin):
-    prepopulated_fields = {'slug': ('username',), }
-    list_filter = ("username",)
-    list_display = ('username', "FirstName", "LastName", 'Age','last_modified','PhoneNumber','last_modified','active')
-    
-    
-
-
-
-
-
-
-admin.site.register(TeacherProfile,TeacherProfileAdmin)
-admin.site.register(UploadedVideo,UploadedVideoAdmin)
-admin.site.register(Category,CategoryAdmin)
+@admin.register(WordUser)
+class WordUserAdmin(admin.ModelAdmin):
+    model = WordUser

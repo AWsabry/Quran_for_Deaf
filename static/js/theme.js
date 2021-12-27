@@ -611,30 +611,28 @@
             }
 
 // ------------------------ Minimal Project Slider
-              var mcpSlider = $ (".project-minimal-slider");
+              var mcpSlider = $(".project-minimal-slider");
                 if(mcpSlider.length) {
-                    mcpSlider.owlCarousel({
-                      autoHeight: true,
-                      rtl:true,
-                      nav:true,
-                      navText: ["<i class='flaticon-back'></i>" , "<i class='flaticon-next'></i>"],
-                      dots:false,
-                      margin:40,
-                      lazyLoad:true,
-                      singleItem:true,
-                      responsive:{
-                          0:{
-                              margin:15,
-                              items:1,
-                          },
-                          768:{
-                              margin:25,
-                              items:2,
-                          },
-                          1200:{
+                  mcpSlider.owlCarousel({
+                    rtl:true,
+                    nav:true,
+                    singleItem:true,
+                    navText: ["<i class='flaticon-back'></i>" , "<i class='flaticon-next'></i>"],
+                    dots:false,
+                    margin:40,
+                    responsive:{
+                        0:{
+                            margin:15,
+                            items:1,
+                        },
+                        768:{
+                            margin:25,
                             items:2,
-                        }
-                      }
+                        },
+                        1200:{
+                        items:2,
+                    }
+                    }
                   });
                 }
 

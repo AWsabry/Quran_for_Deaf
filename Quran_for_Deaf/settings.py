@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-q2*a(*j$m_m*qtj%it(hw$9yys)+-xylk3d%g00zxwvcp(rzq1
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['192.168.1.8']
 
 
 # Application definition
@@ -80,7 +80,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'Quran_for_Deaf.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
@@ -154,3 +153,8 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'hisham12304556@gmail.com'
 EMAIL_HOST_PASSWORD = 'Hh0505690430'
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+ALLOW_UNICODE_SLUGS = True
+
+MAXIMUM_SIZE_ALLOWED_PHOTO = 1024 * 1024 * 20 # 20 MB
+MAXIMUM_SIZE_ALLOWED_VIDEO = 1024 * 1024 * 50 # 50 MB

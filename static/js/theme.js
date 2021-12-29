@@ -616,21 +616,19 @@
                   mcpSlider.owlCarousel({
                     rtl:true,
                     nav:true,
-                    singleItem:true,
                     navText: ["<i class='flaticon-back'></i>" , "<i class='flaticon-next'></i>"],
-                    dots:false,
                     margin:40,
                     responsive:{
                         0:{
-                            margin:15,
-                            items:1,
+                            margin:0,
+                            items:1
                         },
                         768:{
                             margin:25,
-                            items:2,
+                            items:1
                         },
                         1200:{
-                        items:2,
+                            items: itemLength
                     }
                     }
                   });

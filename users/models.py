@@ -56,18 +56,24 @@ class CustomUserManager(BaseUserManager):
     
 class CustomUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(verbose_name='email address', unique=True)
-    first_name = models.CharField(max_length=50)
-    last_name = models.CharField(max_length=50)
+    first_name = models.CharField(max_length=50, null=True)
+    last_name = models.CharField(max_length=50, null=True)
     is_active = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
     is_teacher = models.BooleanField(default=False)
     country = CountryField(blank_label=_('(select country)'), null=True, blank=True)
-    date_joined = models.DateTimeField(auto_now_add=True)
+    date_joined = models.DateTimeField(auto_now_add=True, null=True)
+    Age = models.CharField(max_length=10, default='', null=True, blank=True)
+    PhoneNumber = models.CharField(max_length=20, null=True, blank=True)
+    last_modified = models.DateTimeField(auto_now=True, null=True, blank=True)
+    ProfilePic = models.ImageField(upload_to="TeacherProfile/", null=True, blank=True)
+    Experience = models.TextField(blank=True, null=True)
+    CV = models.FileField(upload_to="TeacherProfile/TeacherCV", null=True, blank=True)
     
     # 3 Boolean Questions with conditions
-    question_one = models.BooleanField(verbose_name=_('Are you Deaf?'),default=False, null=True)
-    question_two = models.BooleanField(verbose_name=_('Are you specialized in dealing with deaf people?'),default=False, null=True)
-    question_three = models.BooleanField(verbose_name=_('Do you have one from your family who are deaf?'),default=False, null=True)
+    question_one = models.BooleanField(verbose_name=_('Are you Deaf?'),default=False)
+    question_two = models.BooleanField(verbose_name=_('Are you specialized in dealing with deaf people?'),default=False)
+    question_three = models.BooleanField(verbose_name=_('Do you have one from your family who are deaf?'),default=False)
     
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['first_name', 'last_name']

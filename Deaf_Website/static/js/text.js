@@ -10,14 +10,23 @@ var preloadAjax = `
 </div>
 `;
 
-function videoFilter(video){
+var preloadSearchAjax = `
+<div class="ctn-preloader" style="position:relative !important; background:none; min-height: 150px">
+<div class="animation-preloader">
+    <div class="spinner" style="width: 60px;height:60px;margin: auto;"></div>
+</div>	
+</div>
+`;
+
+
+function videoFilter(video, thumbnail){
     console.log(video)
     if(video){
         var videoDone = `
         <div class="our-blog">
             <div class="single-blog-post">
                 <div class="img-holder">
-                    <img src="/static/images/blog/13.jpg" alt="">
+                    <img src="/uploads/${thumbnail}" alt="">
                     <a data-fancybox href="/uploads/${video}" class="fancybox video-button"><i class="flaticon-play-button-2"></i></a>
                 </div>
             </div>
@@ -27,7 +36,7 @@ function videoFilter(video){
         var videoDone = `
         <div class="notFound">
             <i class="fas fa-exclamation-triangle"></i>
-            <h3 class="flex">لا يوجد عنصر لعرضه</h3>
+            <h3 class="flex">لا يوجد فيديو لعرضه</h3>
         </div>
         `
     };
@@ -48,7 +57,7 @@ function photoFilter(photo){
                     </div>
                     <div class="hover-valina">
                         <div>
-                            <a href="/uploads/${element}" class="zoom fancybox" data-fancybox="gallery"><img src="{% static 'images/icon/zoom-in.svg'%}" alt="" class="svg"></a>
+                            <a href="/uploads/${element}" class="zoom fancybox" data-fancybox="gallery"><img src="/static/images/icon/zoom-in.svg" alt="" class="svg"></a>
                         </div>
                     </div>
                     <!-- /.hover-valina -->
@@ -77,7 +86,7 @@ function photoFilter(photo){
         var photoDone = `
         <div class="notFound">
             <i class="fas fa-exclamation-triangle"></i>
-            <h3 class="flex">لا يوجد عنصر لعرضه</h3>
+            <h3 class="flex">لا يوجد صور لعرضها</h3>
         </div>
         `;
     };
@@ -88,7 +97,6 @@ function photoFilter(photo){
 
 function contentFilter(pk, fields, video, photo){
     var textnone = `
-    ${fields.name}
     <input type="radio" id="video-${pk}" name="tab-control" checked>
     <input type="radio" id="photo-${pk}" name="tab-control">
     

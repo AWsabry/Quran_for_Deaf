@@ -10,3 +10,10 @@ def convert_to_eastern_arabic(value):
             eastern_arabic_number = r"\u066%s" % c
             arabic_num += eastern_arabic_number
     return arabic_num.encode().decode('unicode_escape')
+
+@register.filter
+def get_url(page, words_search):
+    if words_search:
+        return f'?words_search={words_search}&page={page}'
+    
+    return f'?page={page}'

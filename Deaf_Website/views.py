@@ -38,3 +38,14 @@ def words_search_ajax(request):
     input = request.GET.get('input')
     word = Word.objects.filter(name__icontains=input).values_list('name')
     return HttpResponse(json.dumps(list(dict.fromkeys(word))[:5]))
+<<<<<<< HEAD
+=======
+
+
+def pdf(request):
+    return render(request, "pdf.html")
+
+
+def Quran_Platform(request):
+    return render(request,'Quran_Platform.html')
+>>>>>>> origin/master

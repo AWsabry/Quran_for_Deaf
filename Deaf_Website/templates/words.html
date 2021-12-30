@@ -1,0 +1,158 @@
+{% extends 'base.html' %}
+{% load static deaf_tags %}
+{% block content %}
+
+<!-- Element Style -->
+<div class="popup-upload">
+    {% for word in paginator %}
+        <div id="m-a-f" class="modal fade" data-backdrop="true" style="display: none" aria-hidden="true">
+            <div class="modal-dialog" style="margin-top: 10vw; max-width:600px">
+                <form action="POST">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">هل تريد اضافة محتوى الى {{word.name}}</h5>
+                        </div>
+                        <div class="modal-body text-center p-lg" style="display: grid;grid-template-columns: 1fr 1fr;padding:30px 10px;">
+                            <div class="file_topic_upload">
+                                <div class="image_review" style="display: none;"></div>
+                                <div class="photo-input-content" style="display: flex; justify-content:center">
+                                    <input type="file" name="title_img" class="file_upload_photo" id="img_topic" hidden="hidden" accept="image/jpeg">
+                                    <div class="img_thing" style="display: block;margin-left: 15px; text-align: center;width: 141.6px;">
+                                        <label for="img_topic" class="post_file_upload">اضافة صورة للمحتوى</label>
+                                        <span class="photo_file_name" style="color: #a7a7a7; display: block;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">لا يوجد ملفات</span>
+                                    </div>
+                                    <div class="remove_image" style="display: none;">حذف الصورة</div>
+                                </div>
+                            </div>
+                            <div class="file_topic_upload">
+                                <div class="video-input-content" style="display: flex; justify-content:center">
+                                    <input type="file" name="title_img" class="file_upload_video" id="video_topic" hidden="hidden" accept="video/*">
+                                    <div class="img_thing" style="display: block;margin-left: 15px; text-align: center;width: 141.6px;">
+                                        <label for="video_topic" class="post_file_upload">اضافة فيديو للمحتوى</label>
+                                        <span class="video_file_name" style="color: #a7a7a7; display: block;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">لا يوجد ملفات</span>
+                                    </div>
+                                    <div class="remove_video" style="display: none;">حذف الفيديو</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer" style="display: flex; justify-content:center">
+                            <button type="button" class="btn btn-white" style="padding: 10px 40px;">Send</button>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </form>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+
+<!-- Element Style -->
+<div class="breadcrumbs-three b-wh-text mb-5" style="background-image: url({% static 'images/pray.svg' %}); background-position-x: center;">
+    <div class="container">
+        <h2 class="page-title">كلمات القرآن الكريم بلغة الصم</h2>
+        <ul class="page-breadcrumbs">
+            <li><a href="/">الرئيسية</a></li>
+            <li><i class="fa fa-angle-left" aria-hidden="true"></i></li>
+            <li>كلمات القرآن الكريم</li>
+        </ul>
+    </div> <!-- /.container -->
+</div> <!-- /.breadcrumbs-three -->
+
+<!-- Element Style -->
+<div class="element-section mb-20">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg">
+                <!-- The value of data-role should be z-tabs, data-options is optional to set options -->
+                <div id='theme-tab-seven' style="display:grid; grid-template-areas: '. filter' 'nav content' '. pagination'; grid-column-gap: 10px; grid-template-columns: min-content auto;" class="theme-tab-solid icon-style theme-tab tab-resp" data-role='z-tabs' data-options='{"theme": "silver", "orientation": "vertical", "animation": {"duration": 400, "effects": "slideV"}}'>
+                    <!-- Tab Navigation Menu -->
+                        {% csrf_token %}
+                        <ul class="tabs-menu clearfix" style="grid-area: nav;">
+                            {% for word in paginator.object_list %}
+                                <li><a id="word-{{word.id}}" data-getinfor="{{word.id}}"><button></button>{{word.name}}</a></li>
+                            {% endfor %}
+                        </ul>
+                    <!-- Content container -->
+                    <div class="content-main" style="background: none !important;">
+                        <!-- Graphics -->
+                        {% for word in paginator %}
+                            <div class="z-content-pad">
+                                <div class="blog-details">
+                                    <div class="blog-details-fg">
+                                        <div class="user-comment-area content-info">
+                                            <div class="single-comment d-sm-flex align-items-top" style="position: relative;">
+                                                <img src="{% static 'images/blog/1.jpg' %}" alt="" class="user-img">
+                                                <div class="user-comment-data \">
+                                                    <div class="name" style="display: grid;grid-template-columns: auto auto;grid-column-gap:5px">
+                                                        <span>{{word.user.first_name}} {{word.user.last_name}}</span>
+                                                        <span style="display: flex;justify-content: end;"><button data-target="#m-a-f" data-toggle="modal" class="reply  modal-button"> اقترح</button></span>
+                                                    </div>
+                                                    <div class="date" style="font-size: 15px;">{{word.created|date:'j M, o'}}</div>
+                                                    
+                                                </div> <!-- /.user-comment-data -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="z-content-inner tabs">
+                                </div>
+                                {% if word.description %}
+                                    <div class="content-upload">
+                                        {{word.description}}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <form method="GET" style="grid-area:filter;">
+                        <span class="theme-sidebar-widget" style="margin-bottom: 30px;display:grid; grid-template-columns: 100%">
+                                <span class="sidebar-search">
+                                    <input class="search-input" type="text" placeholder="Search" style="min-width: 200px;" maxlength="70">
+                                    <span class="dropdownContainer">
+                                        <ul class="dropdownMenu">
+                                        </ul>
+                                    </span>
+                                    <button><i class="fa fa-search" aria-hidden="true"></i></button>
+                                </span>
+                        </span>
+                    </form>
+                    <!-- Element Style -->
+                    <span class="element-section pagination">
+                        <div class="container">
+                            <div class="theme-pagination-one text-center pt-15">
+                                <ul style="display: flex; justify-content:center">
+                                    {% with request.GET.words_search as words_search %}
+                                        {% if paginator and paginator.paginator.num_pages != 1 %}
+                                            {% if paginator.has_next %}
+                                                <li><a href="{{paginator.next_page_number|get_url:words_search}}"><i class="flaticon-next"></i></a></li>
+                                            {% endif %}
+                                            <div style="display: flex; direction: ltr;">
+                                                {% for page in page_elibed %}
+                                                    {% if page == paginator.number %}
+                                                    <li class="active"><a href="{{page|get_url:words_search}}">{{page|convert_to_eastern_arabic}}</a></li>
+                                                    {% else %}
+                                                        {% if page == '…' %}
+                                                        <li>{{page}}</li>
+                                                        {% else %}
+                                                        <li><a href="{{page|get_url:words_search}}">{{page|convert_to_eastern_arabic}}</a></li>
+                                                        {% endif %}
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </div>
+                                            {% if paginator.has_previous %}
+                                                <li><a href="{{paginator.previous_page_number|get_url:words_search}}"><i class="flaticon-back"></i></a></li>
+                                            {% endif %}
+                                        {% endif %}
+                                    {% endwith %}
+                                </ul>
+                            </div>
+                        </div>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+

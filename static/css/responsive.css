@@ -540,6 +540,7 @@
 /*(min-width: 576px) and (max-width: 767px)*/
 
 @media (max-width: 575px) {
+  .our-img{height:50vw !important;}
   .modal-body{grid-template-columns: auto !important;grid-template-rows: auto auto;padding: 30px 10vw !important;}
   .modal-body .file_topic_upload:nth-child(1){border: none; border-bottom: 2px dashed #b1b1b1;padding-bottom: 20px;margin-bottom: 20px;}
   .user-comment-data {padding: 15px 0 0 !important;}

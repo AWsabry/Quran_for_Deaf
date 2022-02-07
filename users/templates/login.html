@@ -12,11 +12,7 @@
     </div> <!-- /.shape-wrapper -->
     <div class="signin-form-wrapper">
         <div class="title-area text-center">
-<<<<<<< HEAD
-            <h3>{% trans 'Login.' %}</h3>
-=======
             <h3>دخول</h3>
->>>>>>> origin/master
         </div> <!-- /.title-area -->
         {% if messages %}
         {% for message in messages %}
@@ -31,38 +27,22 @@
                 <div class="col-12">
                     <div class="input-group">
                         <input type="email" name="email" required>
-<<<<<<< HEAD
-                        <label>Email</label>
-=======
                         <label>الإيميل - Email</label>
->>>>>>> origin/master
                     </div> <!-- /.input-group -->
                 </div> <!-- /.col- -->
                 <div class="col-12">
                     <div class="input-group">
                         <input type="password" name="password" required>
-<<<<<<< HEAD
-                        <label>Password</label>
-=======
                         <label>كلمة السر - Password</label>
->>>>>>> origin/master
                     </div> <!-- /.input-group -->
                 </div> <!-- /.col- -->
             </div> <!-- /.row -->
             <div class="agreement-checkbox d-flex justify-content-between align-items-center">
-<<<<<<< HEAD
-                <a href="{% url 'password_reset' %}">Forget Password?</a>
-            </div>
-            <button class="line-button-one" name="login_btn">Login</button>
-        </form>
-        <p class="signUp-text text-center">Don’t have any account? <a href="{% url 'signup' %}">Sign up</a> now.</p>
-=======
                 <a href="{% url 'password_reset' %}">نسيت كلمة السر ؟</a>
             </div>
             <button class="line-button-one" name="login_btn">دخول</button>
         </form>
         <p class="signUp-text text-center">ليس لديك حساب ؟ <a href="{% url 'signup' %}">سجل الآن</a></p>
->>>>>>> origin/master
     </div> <!-- /.sign-up-form-wrapper -->
 </div> <!-- /.signUp-page -->
 {% endblock main_content %}

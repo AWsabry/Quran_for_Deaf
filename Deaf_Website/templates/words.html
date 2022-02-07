@@ -5,12 +5,12 @@
 <!-- Element Style -->
 <div class="popup-upload">
     {% for word in paginator %}
-        <div id="m-a-f" class="modal fade" data-backdrop="true" style="display: none" aria-hidden="true">
+        <div id="m-a-f-{{word.id}}" class="modal fade" data-backdrop="true" style="display: none" aria-hidden="true">
             <div class="modal-dialog" style="margin-top: 10vw; max-width:600px">
                 <form action="POST">
                     <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">هل تريد اضافة محتوى الى {{word.name}}</h5>
+                        <div class="modal-header" style="display:flex; justify-content:center">
+                            <h5 class="modal-title">{{word.name}}</h5>
                         </div>
                         <div class="modal-body text-center p-lg" style="display: grid;grid-template-columns: 1fr 1fr;padding:30px 10px;">
                             <div class="file_topic_upload">
@@ -36,7 +36,7 @@
                             </div>
                         </div>
                         <div class="modal-footer" style="display: flex; justify-content:center">
-                            <button type="button" class="btn btn-white" style="padding: 10px 40px;">Send</button>
+                            <button type="button" class="btn btn-white" style="padding: 10px 40px;">إرسال</button>
                         </div>
                     </div><!-- /.modal-content -->
                 </form>
@@ -46,25 +46,19 @@
 </div>
 
 
+
 <!-- Element Style -->
 <div class="breadcrumbs-three b-wh-text mb-5" style="background-image: url({% static 'images/pray.svg' %}); background-position-x: center;">
     <div class="container">
-<<<<<<< HEAD
-        <h2 class="page-title">Breadcrumbs</h2>
-        <ul class="page-breadcrumbs">
-            <li><a href="index.html">Home</a></li>
-            <li><i class="fa fa-angle-left" aria-hidden="true"></i></li>
-            <li>Breadcrumbs</li>
-=======
         <h2 class="page-title">كلمات القرآن الكريم بلغة الصم</h2>
         <ul class="page-breadcrumbs">
             <li><a href="/">الرئيسية</a></li>
             <li><i class="fa fa-angle-left" aria-hidden="true"></i></li>
             <li>كلمات القرآن الكريم</li>
->>>>>>> origin/master
         </ul>
     </div> <!-- /.container -->
 </div> <!-- /.breadcrumbs-three -->
+
 
 <!-- Element Style -->
 <div class="element-section mb-20">
@@ -93,11 +87,7 @@
                                                 <div class="user-comment-data \">
                                                     <div class="name" style="display: grid;grid-template-columns: auto auto;grid-column-gap:5px">
                                                         <span>{{word.user.first_name}} {{word.user.last_name}}</span>
-<<<<<<< HEAD
-                                                        <span style="display: flex;justify-content: end;"><button data-target="#m-a-f" data-toggle="modal" class="reply  modal-button">Reply</button></span>
-=======
-                                                        <span style="display: flex;justify-content: end;"><button data-target="#m-a-f" data-toggle="modal" class="reply  modal-button"> اقترح</button></span>
->>>>>>> origin/master
+                                                        <span style="display: flex;justify-content: end;"><button data-target="#m-a-f-{{word.id}}" data-toggle="modal" class="reply  modal-button"> اقترح</button></span>
                                                     </div>
                                                     <div class="date" style="font-size: 15px;">{{word.created|date:'j M, o'}}</div>
                                                     

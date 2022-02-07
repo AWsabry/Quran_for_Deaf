@@ -19,15 +19,21 @@ var preloadSearchAjax = `
 `;
 
 
-function videoFilter(video, thumbnail){
-    console.log(video)
+
+function videoFilter(video){
     if(video){
         var videoDone = `
         <div class="our-blog">
             <div class="single-blog-post">
                 <div class="img-holder">
-                    <img src="/uploads/${thumbnail}" alt="">
-                    <a data-fancybox href="/uploads/${video}" class="fancybox video-button"><i class="flaticon-play-button-2"></i></a>
+                    <div class="our-img" style="height:30vw;">
+                        <video class="video-thumb" autobuffer playsinline style="pointer-events: none;">
+                            <source src="/uploads/${video}" type="video/mp4">
+                        </video>
+                        <a data-fancybox="" href="/uploads/${video}" class="fancybox video-button">
+                            <i class="flaticon-play-button-2"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -57,7 +63,7 @@ function photoFilter(photo){
                     </div>
                     <div class="hover-valina">
                         <div>
-                            <a href="/uploads/${element}" class="zoom fancybox" data-fancybox="gallery"><img src="/static/images/icon/zoom-in.svg" alt="" class="svg"></a>
+                            <a href="/uploads/${element}" class="zoom fancybox" data-fancybox=""><img src="/static/images/icon/zoom-in.svg" alt="" class="svg"></a>
                         </div>
                     </div>
                     <!-- /.hover-valina -->
@@ -101,8 +107,8 @@ function contentFilter(pk, fields, video, photo){
     <input type="radio" id="photo-${pk}" name="tab-control">
     
     <ul>
-            <li title="Video"><label class="video-label" for="video-${pk}" role="button"><br><span>Video</span></label></li>
-            <li title="Photo"><label class="photo-label" for="photo-${pk}" role="button"><br><span>Photo</span></label></li>
+            <li title="Video"><label class="video-label" for="video-${pk}" role="button"><br><span>فيديو</span></label></li>
+            <li title="Photo"><label class="photo-label" for="photo-${pk}" role="button"><br><span>صور</span></label></li>
     </ul>
     
     <div class="slider"><div class="indicator"></div></div>

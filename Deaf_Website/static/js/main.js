@@ -8,7 +8,12 @@ var words = document.querySelectorAll('.tabs-menu li a'),
     search_input = document.querySelector('.search-input');
 const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
 
-console.log(search_input)
+var vids = $(".video-thumb"); 
+
+vids.each(vids, function(){
+    this.controls = false; 
+}); 
+
 search_input.addEventListener('input', function(event){
     var dropdownMenu = document.querySelector('.dropdownMenu');
     dropdownMenu.innerHTML = '';
@@ -25,11 +30,9 @@ search_input.addEventListener('input', function(event){
             success: function (response) {
                 dropdownMenu.innerHTML = '';
                 var output = JSON.parse(response);
-                console.log(output)
                 if(output.length){
                     for (let i = 0; i < output.length; i++) {
                         const element = output[i];
-                        console.log(element)
                         dropdownMenu.insertAdjacentHTML('beforeend', `<li><button class="no-sidebar-search" name="words_search" value="${element}"><i class="fas fa-chevron-left drop-icon" aria-hidden="true"></i><span>${element}</span></button></li>`)
                     }
                 }else{
@@ -37,7 +40,6 @@ search_input.addEventListener('input', function(event){
                 }
 
             }, error: function(response){
-                console.log(response)
             }
         });
     }else{
@@ -45,10 +47,44 @@ search_input.addEventListener('input', function(event){
     }
 });
 
+function MakeVideoElement(videoURL) {
+    var video = document.createElement('video');
+    video.controls = true;
+    video.controlslist = 'nodownload';
+    video.src = videoURL;
+    return video
+}
+
+// function generateThumbnail(selectedWordContainer, containerDone, video) {
+//     var canvas = document.createElement("canvas");
+
+//     canvas.width = 300;
+//     canvas.height = 300;
+
+//     video.addEventListener('loadeddata', function() {
+//         reloadRandomFrame();
+//     }, false);
+
+//     video.addEventListener('seeked', function() {
+//         var context = canvas.getContext('2d');
+//         context.drawImage(video, 0, 0, canvas.width, canvas.height);
+//         var pngUrl = canvas.toDataURL();
+//         selectedWordContainer.innerHTML = containerDone;
+//         var img = selectedWordContainer.querySelector('.our-blog .our-img');
+//         img.style.background = `url('${pngUrl}') center no-repeat`;
+//         img.style.backgroundSize = "cover";
+//     }, false);
+
+//     function reloadRandomFrame() {
+//         if (!isNaN(video.duration)) {
+//             var rand = Math.round(Math.random() * video.duration * 1000) + 1;
+//             video.currentTime = rand / 1000;
+//         }
+//     }
+// }
+
 $(document).ready(function () {
     var objID = words[0].dataset.getinfor;
-    console.log(objID)
-    console.log($(`#word-${objID}`))
     $(`#word-${objID}`)[0].click();
 });
 
@@ -111,15 +147,21 @@ words.forEach(function(event, index){
                 selectedWordContainer.innerHTML = preloadAjax;
             },
             success: function (response) {
-                var fields = JSON.parse(response)[0];
+                var fields = JSON.parse(response)[0];              
+
+                photoLabel = document.querySelectorAll('.photo-label');
+
+                var newSlider = $('.project-minimal-slider');
+                init_carousel(newSlider, [fields.fields.image].length);
+                event.removeEventListener('click', foo);
+                event.removeEventListener('touchstart', foo);
+
                 selectedWordContainer.innerHTML = contentFilter(
                     fields.pk, 
                     fields.fields,
-                    videoFilter(fields.fields.video, fields.fields.thumbnail),
+                    videoFilter(fields.fields.video),
                     photoFilter([fields.fields.image])
-                );
-
-                photoLabel = document.querySelectorAll('.photo-label');
+                )
 
                 photoLabel.forEach(function(event){
                     event.addEventListener('click', function(){
@@ -133,12 +175,7 @@ words.forEach(function(event, index){
                     });
                 });
 
-                var newSlider = $('.project-minimal-slider');
-                init_carousel(newSlider, [fields.fields.image].length);
-                event.removeEventListener('click', foo);
-                event.removeEventListener('touchstart', foo);
             }, error: function(response){
-                console.log(response)
             }
         });
     }
@@ -179,4 +216,5 @@ $('.remove_video').on('click', function(){
     video_file_name.innerHTML = 'لا يوجد ملفات'
     $('.remove_video').hide();
 });
+
 

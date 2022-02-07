@@ -4,6 +4,7 @@ from PIL import Image
 from django.core.files import File
 from django.core.files.base import ContentFile
 
+
 def image_thumbnail(video_file):
 
     clips = VideoFileClip(video_file.path)

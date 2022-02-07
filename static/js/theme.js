@@ -903,16 +903,17 @@
 
 
 // ------------------------------------- Fancybox
-        var fancy = $ (".fancybox");
+        var fancy = $ (".fancybox-hesham");
         if(fancy.length) {
+          console.log(fancy.length)
           fancy.fancybox({
-            arrows: true,
+            arrows: false,
             buttons: [
               "zoom",
-              //"share",
-              "slideShow",
-              //"fullScreen",
-              //"download",
+              // "share",
+              // "slideShow",
+              // "fullScreen",
+              // "download",
               "thumbs",
               "close"
             ],

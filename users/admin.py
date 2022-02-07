@@ -23,7 +23,6 @@ class CustomUserAdmin(admin.ModelAdmin):
     # changed.
         if change:
             orig_obj = CustomUser.objects.filter(pk=obj.pk)[0]
-            print(orig_obj)
             if obj.password != orig_obj.password:
                 obj.set_password(obj.password)
         else:

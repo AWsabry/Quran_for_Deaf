@@ -85,7 +85,7 @@ def login(request):
         if user:
             if user.is_active:
                 print('active')
-                return redirect('index')
+                return redirect('Deaf_Website:index')
             else:
                 send_activate_mail(request, user)
                 return redirect('login')
@@ -99,14 +99,16 @@ def activate_user(request, token):
     
     if token:
         last_token = AccessToken.objects.filter(user=token.user, expires__gt=timezone.now()).first()
-        
         if last_token == token:
-            
             if AccessTokenGenerator().check_token(token.user, token.token):       
                 token.user.is_active = True
                 token.user.save()
-                return HttpResponse('activated')
-            return HttpResponse('already activated')
-        return HttpResponse('timeout')
-
-    return  HttpResponse('None found token')
+                messages.success(request, 'لقد تم تفعيل الحساب يمكنك تسجيل الدخول الآن')
+            else:
+                messages.error(request, 'تم تفعيل هذا الحساب مسبقا', extra_tags='danger')
+        else:   
+            messages.error(request, 'لقد انتهى الوقت المسموح لهذا الرابط', extra_tags='danger')
+    else:
+        messages.error(request, 'لم نتمكن من ايجاد هذا الرابط، حاول مرة اخرى', extra_tags='danger')
+    
+    return redirect('login')

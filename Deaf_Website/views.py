@@ -5,9 +5,9 @@ from .models import Word
 from django.core.paginator import Paginator
 from django.core import serializers
 import json
+from django.contrib.postgres.search import TrigramDistance
 
 # Create your views here.
-
 
 def index(request):
     return render(request, "index.html")
@@ -25,21 +25,20 @@ def words(request):
     
     return render(request, "words.html", {
         'paginator':p_obj.get_page(page),
-        'page_elibed': p_elibed
+        'page_elibed': p_elibed,
+        'word':words[0]
         })
     
 def words_ajax(request):
     id = int(request.POST.get('id'))
     word = Word.objects.filter(id=id)
-    
+
     return HttpResponse(serializers.serialize('json' ,word))
 
 def words_search_ajax(request):
     input = request.GET.get('input')
     word = Word.objects.filter(name__icontains=input).values_list('name')
     return HttpResponse(json.dumps(list(dict.fromkeys(word))[:5]))
-<<<<<<< HEAD
-=======
 
 
 def pdf(request):
@@ -48,4 +47,3 @@ def pdf(request):
 
 def Quran_Platform(request):
     return render(request,'Quran_Platform.html')
->>>>>>> origin/master

@@ -12,11 +12,7 @@
 	</div> <!-- /.shape-wrapper -->
 	<div class="signin-form-wrapper">
 		<div class="title-area text-center">
-<<<<<<< HEAD
-			<h3>{% trans "Register Now!" %}</h3>
-=======
 			<h3>سجل الآن !</h3>
->>>>>>> origin/master
 		</div> <!-- /.title-area -->
 		{% if messages %}
 			{% for message in messages %}
@@ -31,11 +27,7 @@
 				<div class="col-12">
 					<div class="input-group">
 						{% render_field form.email %}
-<<<<<<< HEAD
-						<label>{% trans "Email" %}</label>
-=======
 						<label>الإيميل - Email</label>
->>>>>>> origin/master
 						{% if form.errors.email %}
 							<svg class="error_signup" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15px" height="13px" viewBox="0 0 15 13" version="1.1" data-tooltip-color="red" data-toggle="tooltip" data-placement="left" data-html="true" title="{{form.errors.email.as_text}}">
 								<!-- Generator: sketchtool 53 (72520) - https://sketchapp.com -->
@@ -58,11 +50,7 @@
 					<div class="col">
 						<div class="input-group">
 							{% render_field form.first_name%}
-<<<<<<< HEAD
-							<label>{% trans "First Name" %}</label>
-=======
 							<label>الإسم الأول - Firstname</label>
->>>>>>> origin/master
 							{% if form.errors.first_name %}
 							<svg class="error_signup" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15px" height="13px" viewBox="0 0 15 13" version="1.1" data-tooltip-color="red" data-toggle="tooltip" data-placement="left" data-html="true" title="{{form.errors.first_name.as_text}}">
 								<!-- Generator: sketchtool 53 (72520) - https://sketchapp.com -->
@@ -84,11 +72,7 @@
 					<div class="col">
 						<div class="input-group">
 							{% render_field form.last_name %}
-<<<<<<< HEAD
-							<label>{% trans "Last Name" %}</label>
-=======
 							<label>الإسم الأخير - Lastname</label>
->>>>>>> origin/master
 							{% if form.errors.last_name %}
 							<svg class="error_signup" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15px" height="13px" viewBox="0 0 15 13" version="1.1" data-tooltip-color="red" data-toggle="tooltip" data-placement="left" data-html="true" title="{{form.errors.last_name.as_text}}">
 								<!-- Generator: sketchtool 53 (72520) - https://sketchapp.com -->
@@ -111,11 +95,7 @@
 				<div class="col-12">
 					<div class="input-group">
 						{% render_field form.password1 %}
-<<<<<<< HEAD
-						<label>{% trans "Password" %}</label>
-=======
 						<label>كلمة السر - Password</label>
->>>>>>> origin/master
 						{% if form.errors.password1 %}
 						<svg class="error_signup" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15px" height="13px" viewBox="0 0 15 13" version="1.1" data-tooltip-color="red" data-toggle="tooltip" data-placement="left" data-html="true" title="{{form.errors.password1.as_text}}">
 							<!-- Generator: sketchtool 53 (72520) - https://sketchapp.com -->
@@ -137,11 +117,7 @@
 				<div class="col-12">
 					<div class="input-group">
 						{% render_field form.password2 %}
-<<<<<<< HEAD
-						<label>{% trans "Password Confirmation" %}</label>
-=======
 						<label>تأكيد كلمة السر - Password Confirmation</label>
->>>>>>> origin/master
 						{% if form.errors.password2 %}
 							<svg class="error_signup" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15px" height="13px" viewBox="0 0 15 13" version="1.1" data-tooltip-color="red" data-toggle="tooltip" data-placement="left" data-html="true" title="{{form.errors.password2.as_text}}">
 								<!-- Generator: sketchtool 53 (72520) - https://sketchapp.com -->
@@ -170,15 +146,9 @@
 				<input type="checkbox" id="agreement">
 				<label for="agreement">{% trans "I agree to the terms and policy from the rogan inc." %}</label>
 			</div>
-<<<<<<< HEAD
-			<button class="line-button-one">{% trans "Signup" %}</button>
-		</form>
-		<p class="signUp-text text-center">{% trans "have account?" %} <a href="{% url 'login' %}">{% trans "Sign up" %}</a> {% trans "now" %}.</p>
-=======
 			<button class="line-button-one">تسجيل - Register</button>
 		</form>
 		<p class="signUp-text text-center">لديك حساب ؟ <a href="{% url 'login' %}">ادخل الآن</a>.</p>
->>>>>>> origin/master
 	</div> <!-- /.sign-up-form-wrapper -->
 </div> <!-- /.signUp-page -->
 {% endblock main_content %}

@@ -43,7 +43,6 @@ INSTALLED_APPS = [
     'Deaf_Website',
     'django_countries',
     'widget_tweaks',
-    'mailer'
 ]
 
 MIDDLEWARE = [
@@ -144,7 +143,7 @@ AUTHENTICATION_BACKENDS = ('django.contrib.auth.backends.AllowAllUsersModelBacke
 
 AUTH_USER_MODEL = 'users.CustomUser'
 
-AUTH_EMAIL_ACTIVATE_EXPIRE = 30 # in seconds
+AUTH_EMAIL_ACTIVATE_EXPIRE = 180 # in seconds
 
 # SMTP CONFIGURATION
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
@@ -152,7 +151,7 @@ EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com' 
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'hisham1230456@gmail.com'
-EMAIL_HOST_PASSWORD = 'Hh0505690430'
+EMAIL_HOST_PASSWORD = 'Hesham@0505690430'
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 MAXIMUM_SIZE_ALLOWED_PHOTO = 1024 * 1024 * 2

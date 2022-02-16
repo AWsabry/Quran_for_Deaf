@@ -5,45 +5,91 @@
 <!-- Element Style -->
 <div class="popup-upload">
     {% for word in paginator %}
-        <div id="m-a-f-{{word.id}}" class="modal fade" data-backdrop="true" style="display: none" aria-hidden="true">
-            <div class="modal-dialog" style="margin-top: 10vw; max-width:600px">
-                <form action="POST">
-                    <div class="modal-content">
-                        <div class="modal-header" style="display:flex; justify-content:center">
-                            <h5 class="modal-title">{{word.name}}</h5>
-                        </div>
-                        <div class="modal-body text-center p-lg" style="display: grid;grid-template-columns: 1fr 1fr;padding:30px 10px;">
-                            <div class="file_topic_upload">
-                                <div class="image_review" style="display: none;"></div>
-                                <div class="photo-input-content" style="display: flex; justify-content:center">
-                                    <input type="file" name="title_img" class="file_upload_photo" id="img_topic" hidden="hidden" accept="image/jpeg">
-                                    <div class="img_thing" style="display: block;margin-left: 15px; text-align: center;width: 141.6px;">
-                                        <label for="img_topic" class="post_file_upload">اضافة صورة للمحتوى</label>
-                                        <span class="photo_file_name" style="color: #a7a7a7; display: block;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">لا يوجد ملفات</span>
+        <div id="m-a-f-{{word.id}}" style="padding: 0;" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: fit-content; margin: 30px auto;">
+                <div class="modal-content"> 
+                    <form method="GET" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="modal-content">
+                            <div class="modal-header" style="display:flex; justify-content:center">
+                                <h5 class="modal-title">{{word.name}}</h5>
+                            </div>
+                            <div class="modal-body text-center p-lg" style="display: grid;grid-template-columns: 1fr 1fr; gap:7px">
+                                <div class="file_topic_upload">
+                                    <div class="image_review" style="display: none;"></div>
+                                    <div class="photo-input-content" style="display: flex; justify-content:center">
+                                        <input type="file" class="file_upload_photo" id="img_topic_{{word.id}}" hidden="hidden" autocomplete="off" accept="image/jpeg">
+                                        <div class="img_thing" style="display: block;margin-left: 15px; text-align: center;width: 141.6px;">
+                                            <label for="img_topic_{{word.id}}" class="post_file_upload">اضافة صورة للمحتوى</label>
+                                            <span class="photo_file_name" style="color: #a7a7a7; display: block;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">لا يوجد ملفات</span>
+                                        </div>
+                                        <div class="remove_image" style="display: none;">حذف الصورة</div>
                                     </div>
-                                    <div class="remove_image" style="display: none;">حذف الصورة</div>
+                                    <div class="check-list check-list-image"></div>
+                                </div>
+                                <div class="file_topic_upload">
+                                    <div class="video-input-content" style="display: flex; justify-content:center">
+                                        <input type="file" class="file_upload_video" id="video_topic_{{word.id}}" hidden="hidden" autocomplete="off" accept="video/*">
+                                        <div class="img_thing" style="display: block;margin-left: 15px; text-align: center;width: 141.6px;">
+                                            <label for="video_topic_{{word.id}}" class="post_file_upload">اضافة فيديو للمحتوى</label>
+                                            <span class="video_file_name" style="color: #a7a7a7; display: block;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">لا يوجد ملفات</span>
+                                        </div>
+                                        <div class="remove_video" style="display: none;">حذف الفيديو</div>
+                                    </div>
+                                    <div class="check-list check-list-video" style="margin-right: 10px;"></div>
                                 </div>
                             </div>
-                            <div class="file_topic_upload">
-                                <div class="video-input-content" style="display: flex; justify-content:center">
-                                    <input type="file" name="title_img" class="file_upload_video" id="video_topic" hidden="hidden" accept="video/*">
-                                    <div class="img_thing" style="display: block;margin-left: 15px; text-align: center;width: 141.6px;">
-                                        <label for="video_topic" class="post_file_upload">اضافة فيديو للمحتوى</label>
-                                        <span class="video_file_name" style="color: #a7a7a7; display: block;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">لا يوجد ملفات</span>
-                                    </div>
-                                    <div class="remove_video" style="display: none;">حذف الفيديو</div>
-                                </div>
+                            <div class="modal-footer" style="display: flex; justify-content:center; align-items: center; gap:20px;">
+                                <div class="upload-delete"><i class="fa fa-trash"></i></div>
+                                <button type="submit" class="btn btn-white" style="padding: 10px 40px;position:relative;opacity: 1 !important;">
+                                    <span>ارسال</span>
+                                </button>
                             </div>
-                        </div>
-                        <div class="modal-footer" style="display: flex; justify-content:center">
-                            <button type="button" class="btn btn-white" style="padding: 10px 40px;">إرسال</button>
-                        </div>
-                    </div><!-- /.modal-content -->
-                </form>
+                        </div><!-- /.modal-content -->
+                    </form>
+                </div>
             </div>
         </div>
     {% endfor %}
 </div>
+
+<!-- <div class="modal-dialog">
+    <form action="POST" enctype="multipart/form-data">
+        <div class="modal-content">
+            <div class="modal-header" style="display:flex; justify-content:center">
+                <h5 class="modal-title">{{word.name}}</h5>
+            </div>
+            <div class="modal-body text-center p-lg">
+                <div class="file_topic_upload">
+                    <div class="image_review" style="display: none;"></div>
+                    <div class="photo-input-content" style="display: flex; justify-content:center">
+                        <input type="file" class="file_upload_photo" id="img_topic_{{word.id}}" hidden="hidden" accept="image/jpeg">
+                        <div class="img_thing" style="display: block;margin-left: 15px; text-align: center;width: 141.6px;">
+                            <label for="img_topic_{{word.id}}" class="post_file_upload">اضافة صورة للمحتوى</label>
+                            <span class="photo_file_name" style="color: #a7a7a7; display: block;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">لا يوجد ملفات</span>
+                        </div>
+                        <div class="remove_image" style="display: none;">حذف الصورة</div>
+                    </div>
+                    <div class="check-list check-list-image"></div>
+                </div>
+                <div class="file_topic_upload">
+                    <div class="video-input-content" style="display: flex; justify-content:center">
+                        <input type="file" class="file_upload_video" id="video_topic_{{word.id}}" hidden="hidden" accept="video/*">
+                        <div class="img_thing" style="display: block;margin-left: 15px; text-align: center;width: 141.6px;">
+                            <label for="video_topic_{{word.id}}" class="post_file_upload">اضافة فيديو للمحتوى</label>
+                            <span class="video_file_name" style="color: #a7a7a7; display: block;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">لا يوجد ملفات</span>
+                        </div>
+                        <div class="remove_video" style="display: none;">حذف الفيديو</div>
+                    </div>
+                    <div class="check-list check-list-video" style="margin-right: 10px;"></div>
+                </div>
+            </div>
+            <div class="modal-footer" style="display: flex; justify-content:center">
+                <button type="button" class="btn btn-white" style="padding: 10px 40px;" disabled="disabled" autocomplete="off">إرسال</button>
+            </div>
+        </div>
+    </form>
+</div> -->
 
 
 

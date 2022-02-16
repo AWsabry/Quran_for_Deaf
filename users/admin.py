@@ -52,9 +52,7 @@ class CustomUserAdmin(admin.ModelAdmin):
                 self.fieldsets.append(('Teacher', {'fields': ('Age', 'PhoneNumber', 'ProfilePic', 'Experience', 'CV')}))
             
         return self.fieldsets
-        
-        # return [(None, {'fields': self.get_fields(request, obj)})]
-        
+
     search_fields = ('email',)
     ordering = ('email',)
 

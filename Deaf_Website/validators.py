@@ -4,7 +4,7 @@ from Quran_for_Deaf import settings
 
 def _ext_photo(file):
     extension = os.path.splitext(file.name)[1]
-    allowed_ext = ['.jpg','.jpeg']
+    allowed_ext = settings.ALLOWED_EXT_PHOTO
     
     if extension not in allowed_ext:
         raise ValidationError('the allowed extensions only are jpg, jpeg.')
@@ -14,7 +14,7 @@ def _ext_photo(file):
 
 def _ext_video(file):
     extension = os.path.splitext(file.name)[1]
-    allowed_ext = ['.mp4']
+    allowed_ext = settings.ALLOWED_EXT_VIDEO
     
     if extension not in allowed_ext:
         raise ValidationError('the allowed extensions only are mp4.')

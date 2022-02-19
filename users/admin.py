@@ -48,7 +48,7 @@ class CustomUserAdmin(admin.ModelAdmin):
             )})
         ]
         if obj:
-            if obj.is_teacher:
+            if obj.is_teacher or obj.is_superuser:
                 self.fieldsets.append(('Teacher', {'fields': ('Age', 'PhoneNumber', 'ProfilePic', 'Experience', 'CV')}))
             
         return self.fieldsets
@@ -67,4 +67,3 @@ class AccessTokenAdmin(admin.ModelAdmin):
     list_display = ('user', 'token', 'created')
 
 admin.site.register(CustomUser, CustomUserAdmin)
-admin.site.register(AccessToken, AccessTokenAdmin)

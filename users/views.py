@@ -9,11 +9,10 @@ from users.decorators import auth_users_not_access
 from users.forms import CustomUserForm
 from django.contrib import messages
 from django.contrib.sites.shortcuts import get_current_site
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, login as user_login
 from users.utils import AccessTokenGenerator
 from users.thread import EmailThread
 from django.utils.translation import gettext as _
-from django.contrib.auth.models import Group
 from django.views.decorators.csrf import csrf_exempt
 from django.core.mail import EmailMessage
 
@@ -50,6 +49,7 @@ def send_activate_mail(request, user):
         else:
             messages.error(request,_('Please varify the account (an email have been sent) please wait %(time_tosend)8.0f') % {'time_tosend':time_tosend} , extra_tags='danger')
 
+@auth_users_not_access(login_url='Deaf_Website:index')
 @csrf_exempt
 def signup(request):
     if request.method == 'POST':
@@ -76,6 +76,7 @@ def signup(request):
         
     return render(request, 'sign_up.html', {'form':form})
 
+@auth_users_not_access(login_url='Deaf_Website:index')
 @csrf_exempt
 def login(request):
     if request.method == 'POST' and 'login_btn' in request.POST:
@@ -84,7 +85,7 @@ def login(request):
         user = authenticate(request, email=email, password=password)
         if user:
             if user.is_active:
-                print('active')
+                user_login(request, user)
                 return redirect('Deaf_Website:index')
             else:
                 send_activate_mail(request, user)

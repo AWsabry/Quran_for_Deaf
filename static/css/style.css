@@ -648,7 +648,6 @@ body .solid-button-one:hover,.navbar .navbar-toggler,.faq-tab-wrapper .faq-panel
 .theme-footer-four .social-icon li a:hover,.pricing-tab-menu .nav-wrapper,body .line-button-three:hover,.arch-testimonial .owl-theme .owl-dots .owl-dot span,.studio-feature-area .feature-block:hover {
   border-color: #FF3A46;
 }
-
 .tabs-content{
   display: flex;
 
@@ -8337,6 +8336,12 @@ font-weight:600;color: #fff;}
   font-size: 55px;
   color: #313131;
 }
+.page-words{
+  margin-top: 15px !important;
+  font-size: 40px;
+  font-weight: 600;
+  color: #fff !important;
+}
 .breadcrumbs-two .page-breadcrumbs li {
   display: inline-block;
   font-size: 22px;
@@ -8859,7 +8864,8 @@ Modal animation
   background-color: #ebebeb9e;
 }
 .drop-icon{
-  margin-left: 5px;
+  font-size: 13px;
+  margin-left: 15px;
   transition: 100ms ease-in;
   color: #3b3b3b;
 }

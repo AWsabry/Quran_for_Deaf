@@ -4,53 +4,100 @@
 
 <!-- Element Style -->
 <div class="popup-upload">
-    {% for word in paginator %}
-        <div id="m-a-f-{{word.id}}" style="padding: 0;" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: fit-content; margin: 30px auto;">
-                <div class="modal-content"> 
-                    <form method="GET" enctype="multipart/form-data">
-                        {% csrf_token %}
-                        <div class="modal-content">
-                            <div class="modal-header" style="display:flex; justify-content:center">
-                                <h5 class="modal-title">{{word.name}}</h5>
-                            </div>
-                            <div class="modal-body text-center p-lg" style="display: grid;grid-template-columns: 1fr 1fr; gap:7px">
-                                <div class="file_topic_upload">
-                                    <div class="image_review" style="display: none;"></div>
-                                    <div class="photo-input-content" style="display: flex; justify-content:center">
-                                        <input type="file" class="file_upload_photo" id="img_topic_{{word.id}}" hidden="hidden" autocomplete="off" accept="image/jpeg">
-                                        <div class="img_thing" style="display: block;margin-left: 15px; text-align: center;width: 141.6px;">
-                                            <label for="img_topic_{{word.id}}" class="post_file_upload">اضافة صورة للمحتوى</label>
-                                            <span class="photo_file_name" style="color: #a7a7a7; display: block;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">لا يوجد ملفات</span>
+    {% if not request.user.is_anonymous %}
+        {% if not request.user.is_superuser and not request.user.is_teacher%}
+            {% for word in paginator %}
+                <div id="m-a-f-{{word.id}}" style="padding: 0;" class="modal modal-all fade" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document" style="margin: 30px auto;">
+                        <div class="modal-content mx-3"> 
+                            <form method="GET" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                {% if request.user|word_user_check:word %}
+                                        <div class="modal-content">
+                                            <div class="modal-header" style="display:flex; justify-content:center;color:#64697A;">
+                                                <h5 class="modal-title"  style="color:#3e3e3e">{{word.name}}</h5>
+                                            </div>
+                                            <div class="modal-body text-center p-lg" style="position: relative;background-image: url({% static 'images/maze.svg' %});">
+                                                <figure class="fs-1 px-2 py-3 text-center">
+                                                    <blockquote class="display-2" style="display: flex;justify-content:center;align-items:center;">
+                                                        <span><img src="{% static 'images/gear.svg' %}" style="width: 150px;" ></span>
+                                                    </blockquote>
+                                                    <blockquote class="blockquote" style="color:#3e3e3e">
+                                                        <p>يتم مراجعة اقتراحك في الوقت الحالي</p>
+                                                    </blockquote>
+                                                    <figcaption class="blockquote-footer text-muted" style="font-size: 70%;">
+                                                        سوف نخبرك فور قبول جميع المعلمين على اقتراحك
+                                                    </figcaption>
+                                                </figure>
+                                            </div>
                                         </div>
-                                        <div class="remove_image" style="display: none;">حذف الصورة</div>
-                                    </div>
-                                    <div class="check-list check-list-image"></div>
-                                </div>
-                                <div class="file_topic_upload">
-                                    <div class="video-input-content" style="display: flex; justify-content:center">
-                                        <input type="file" class="file_upload_video" id="video_topic_{{word.id}}" hidden="hidden" autocomplete="off" accept="video/*">
-                                        <div class="img_thing" style="display: block;margin-left: 15px; text-align: center;width: 141.6px;">
-                                            <label for="video_topic_{{word.id}}" class="post_file_upload">اضافة فيديو للمحتوى</label>
-                                            <span class="video_file_name" style="color: #a7a7a7; display: block;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">لا يوجد ملفات</span>
+                                {% else %}
+                                    {% if request.user|word_check:word %}
+                                        <div class="modal-content">
+                                            <div class="modal-header" style="display:flex; justify-content:center">
+                                                <h5 class="modal-title" style="color:#3e3e3e">{{word.name}}</h5>
+                                            </div>
+                                            <figure class="fs-1 px-2 py-3 text-center">
+                                                <blockquote class="display-2" style="display: flex;justify-content:center;align-items:center;">
+                                                    <span style="position: relative;">
+                                                        <i class="fas fa-check" style="position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);color: #fff;font-size: 70px;"></i>
+                                                        <img src="{% static 'images/circle.svg' %}" style="width: 150px;" >
+                                                    </span>
+                                                </blockquote>
+                                                <blockquote class="blockquote" style="color:#3e3e3e">
+                                                    <p>تمت الموافقة على اقتراحك لهذه الكلمة</p>
+                                                </blockquote>
+                                                <figcaption class="blockquote-footer text-muted" style="font-size: 70%;">
+                                                    يمكنك البحث عن منشورات بالكتابة "<strong>{{request.user.first_name}} {{request.user.last_name}}</strong>" في خانة البحث
+                                                </figcaption>
+                                            </figure>
                                         </div>
-                                        <div class="remove_video" style="display: none;">حذف الفيديو</div>
-                                    </div>
-                                    <div class="check-list check-list-video" style="margin-right: 10px;"></div>
-                                </div>
-                            </div>
-                            <div class="modal-footer" style="display: flex; justify-content:center; align-items: center; gap:20px;">
-                                <div class="upload-delete"><i class="fa fa-trash"></i></div>
-                                <button type="submit" class="btn btn-white" style="padding: 10px 40px;position:relative;opacity: 1 !important;">
-                                    <span>ارسال</span>
-                                </button>
-                            </div>
-                        </div><!-- /.modal-content -->
-                    </form>
+                                    {% else %}
+                                        <div class="modal-content">
+                                            <div class="modal-header" style="display:flex; justify-content:center">
+                                                <h5 class="modal-title" style="color:#3e3e3e">{{word.name}}</h5>
+                                            </div>
+                                            <div class="modal-body text-center p-lg" style="display: grid;grid-template-columns: 1fr 1fr; gap:7px">
+                                                <div class="file_topic_upload">
+                                                    <div class="image_review" style="display: none;"></div>
+                                                    <div class="photo-input-content">
+                                                        <input type="file" class="file_upload_photo" id="img_topic_{{word.id}}" hidden="hidden" autocomplete="off" accept="image/jpeg">
+                                                        <div class="img_thing" style="display: block;margin-left: 15px; text-align: center;width: 141.6px;">
+                                                            <label for="img_topic_{{word.id}}" class="post_file_upload">اضافة صورة للمحتوى</label>
+                                                            <span class="photo_file_name" style="color: #a7a7a7; display: block;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">لا يوجد ملفات</span>
+                                                        </div>
+                                                        <div class="remove_image mt-2" style="display: none;">حذف الصورة</div>
+                                                    </div>
+                                                    <div class="check-list check-list-image"></div>
+                                                </div>
+                                                <div class="file_topic_upload">
+                                                    <div class="video-input-content">
+                                                        <input type="file" class="file_upload_video" id="video_topic_{{word.id}}" hidden="hidden" autocomplete="off" accept="video/*">
+                                                        <div class="img_thing" style="display: block;margin-left: 15px; text-align: center;width: 141.6px;">
+                                                            <label for="video_topic_{{word.id}}" class="post_file_upload">اضافة فيديو للمحتوى</label>
+                                                            <span class="video_file_name" style="color: #a7a7a7; display: block;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">لا يوجد ملفات</span>
+                                                        </div>
+                                                        <div class="remove_video mt-2" style="display: none;">حذف الفيديو</div>
+                                                    </div>
+                                                    <div class="check-list check-list-video" style="margin-right: 10px;"></div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer" style="display: flex; justify-content:center; align-items: center; gap:20px;">
+                                                <div class="upload-delete"><i class="fa fa-trash"></i></div>
+                                                <button type="submit" class="btn btn-white" style="padding: 10px 40px;position:relative;opacity: 1 !important;">
+                                                    <span>ارسال</span>
+                                                </button>
+                                            </div>
+                                        </div><!-- /.modal-content -->
+                                    {% endif %}
+                                {% endif %}
+                            </form>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-    {% endfor %}
+            {% endfor %}
+        {% endif %}
+    {% endif %}
 </div>
 
 <!-- <div class="modal-dialog">
@@ -102,6 +149,12 @@
             <li><i class="fa fa-angle-left" aria-hidden="true"></i></li>
             <li>كلمات القرآن الكريم</li>
         </ul>
+        <div class="page-words">تحتوي مكتبة الموقع على "<strong>{{word_all}} كلمة</strong>"</div>
+        {% if messages %}
+            {% for message in messages %}
+                <div class="page-words" style="font-size: 27px; opacity:0.6;">{{message}}</div>
+            {% endfor %}
+        {% endif %}
     </div> <!-- /.container -->
 </div> <!-- /.breadcrumbs-three -->
 
@@ -117,7 +170,14 @@
                         {% csrf_token %}
                         <ul class="tabs-menu clearfix" style="grid-area: nav;">
                             {% for word in paginator.object_list %}
-                                <li><a id="word-{{word.id}}" data-getinfor="{{word.id}}"><button></button>{{word.name}}</a></li>
+                                <li>
+                                    <a id="word-{{word.id}}" data-getinfor="{{word.id}}"  style="display: flex;justify-content:space-between;align-items:center">
+                                        <span class="ml-2" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">{{word.name}}</span>
+                                        {% if word.user.is_teacher or word.user.is_superuser %}
+                                            <span style="opacity:0.6;font-size:15px"><i class="fas fa-user-tie"></i></span>
+                                        {% endif %}
+                                    </a>
+                                </li>
                             {% endfor %}
                         </ul>
                     <!-- Content container -->
@@ -129,11 +189,23 @@
                                     <div class="blog-details-fg">
                                         <div class="user-comment-area content-info">
                                             <div class="single-comment d-sm-flex align-items-top" style="position: relative;">
-                                                <img src="{% static 'images/blog/1.jpg' %}" alt="" class="user-img">
+                                                {% if word.user.ProfilePic %}
+                                                    <img src="{{word.user.ProfilePic.url}}" alt="" class="user-img">
+                                                {% else %}
+                                                    <img src="{% static 'images/default_user.jpg' %}" alt="" class="user-img">
+                                                {% endif %}
                                                 <div class="user-comment-data \">
                                                     <div class="name" style="display: grid;grid-template-columns: auto auto;grid-column-gap:5px">
                                                         <span>{{word.user.first_name}} {{word.user.last_name}}</span>
-                                                        <span style="display: flex;justify-content: end;"><button data-target="#m-a-f-{{word.id}}" data-toggle="modal" class="reply  modal-button"> اقترح</button></span>
+                                                        <span style="display: flex;justify-content: end;">
+                                                            {% if not request.user.is_anonymous %}
+                                                                {% if not request.user.is_superuser and not request.user.is_teacher%}
+                                                                    <button data-target="#m-a-f-{{word.id}}" data-toggle="modal" class="reply  modal-button"> اقترح</button>
+                                                                {% endif %}
+                                                            {% else %}
+                                                                <a href="{% url 'login' %}" target="_blank"><button class="reply  modal-button"> اقترح</button></a>
+                                                            {% endif %}
+                                                        </span>
                                                     </div>
                                                     <div class="date" style="font-size: 15px;">{{word.created|date:'j M, o'}}</div>
                                                     
@@ -155,12 +227,14 @@
                     <form method="GET" style="grid-area:filter;">
                         <span class="theme-sidebar-widget" style="margin-bottom: 30px;display:grid; grid-template-columns: 100%">
                                 <span class="sidebar-search">
-                                    <input class="search-input" type="text" placeholder="Search" style="min-width: 200px;" maxlength="70">
+                                    <input class="search-input" type="text" placeholder="ابحث عن كلمة في القرآن الكريم أو عن معلم" style="min-width: 200px;" maxlength="70" {% if request.GET.words_search %}
+                                        value="{{request.GET.words_search}}"
+                                    {% endif %}>
+                                    <button type="submit" class="search-btn-form" name="words_search"><i class="fa fa-search" aria-hidden="true" tabindex="0"></i></button>
                                     <span class="dropdownContainer">
                                         <ul class="dropdownMenu">
                                         </ul>
                                     </span>
-                                    <button><i class="fa fa-search" aria-hidden="true"></i></button>
                                 </span>
                         </span>
                     </form>
@@ -203,4 +277,3 @@
 </div>
 
 {% endblock content %}
-

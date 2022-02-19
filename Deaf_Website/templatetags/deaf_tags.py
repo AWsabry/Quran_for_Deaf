@@ -1,5 +1,7 @@
 from django import template
 
+from Deaf_Website.models import Word, WordUser
+
 register = template.Library()
 
 @register.filter
@@ -17,3 +19,17 @@ def get_url(page, words_search):
         return f'?words_search={words_search}&page={page}'
     
     return f'?page={page}'
+
+@register.filter
+def word_user_check(user, word):
+    check = True if WordUser.objects.filter(user=user, word=word) else False
+    return check
+
+@register.filter
+def word_check(user, word):
+    print(user)
+    print(word.slug)
+    check = True if Word.objects.filter(user=user, word_attach=word) else False
+    
+    print(check)
+    return check

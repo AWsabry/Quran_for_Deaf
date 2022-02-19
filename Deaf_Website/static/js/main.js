@@ -6,7 +6,8 @@ var words = document.querySelectorAll('.tabs-menu li a'),
     video_input_content = document.querySelectorAll('.video-input-content'),
     remove_video = document.querySelectorAll('.file_topic_upload .remove_video'),
     search_input = document.querySelector('.search-input'),
-    modal = document.querySelectorAll('.modal-footer button');
+    modal = document.querySelectorAll('.modal-footer button'),
+    modal_all = document.querySelectorAll('.modal-all');
 
 var vids = $(".video-thumb"); 
 
@@ -93,7 +94,6 @@ remove_video.forEach(function(video){
 modal.forEach(function(event, index){
     $(document).on('submit', event, function(e){
         e.preventDefault();
-        console.log(event)
         var modal_parent = event.parentElement.parentElement,
             file_upload_photo = modal_parent.querySelector('.file_upload_photo'),
             file_upload_video = modal_parent.querySelector('.file_upload_video'),
@@ -153,8 +153,10 @@ modal.forEach(function(event, index){
                         $(file_upload_video).attr('disabled','disabled');
                         $(event).addClass('no-hover');
 
-                        var formDataFile = new FormData();
+                        var formDataFile = new FormData(),
+                            word = e.originalEvent.path[3];
                         
+                        formDataFile.append('word', word.id.split('-')[word.id.split('-').length - 1])
                         formDataFile.append('image', file_image);
                         formDataFile.append('video', file_video);
 
@@ -163,7 +165,6 @@ modal.forEach(function(event, index){
                             url: "/words_users_uploads/",
                             headers: {'X-CSRFToken': csrftoken},
                             data: formDataFile,
-                            dataType: 'json',
                             cache: false,
                             processData: false,
                             contentType: false,
@@ -174,28 +175,67 @@ modal.forEach(function(event, index){
                                 $(upload_delete).show();
 
                                 xhr.upload.addEventListener('progress', function (e) {
-                                    console.log(e)
                                     if (e.lengthComputable) {
                                         var percent = Math.round((e.loaded / e.total) * 100);
                                         event.innerHTML = `<div class="uploud-bar" style="width: ${percent}%"><span>${percent}</span> %</div><span>... جاري الرفع</span>`;
                                     }
                                 });
-
                                 upload_delete.addEventListener('click', function(){
-                                    console.log(upload_delete);
                                     xhr.abort();
+                                    var image_review = word.querySelector('.image_review'),
+                                        remove_image = word.querySelector('.remove_image'),
+                                        remove_video = word.querySelector('.remove_video'),
+                                        photo_file_name = word.querySelector('.photo_file_name'),
+                                        video_file_name = word.querySelector('.video_file_name');
+
+                                    
                                     $(upload_delete).hide();
+
+                                    check_list_image.innerHTML = '';
+                                    check_list_video.innerHTML = '';
+                                    
+                                    file_upload_photo.value = '';
                                     $(file_upload_photo).removeAttr('disabled','disabled');
+                                    $(image_review).hide();
+                                    $(remove_image).hide();
+                                    photo_file_name.innerHTML = 'لا يوجد ملفات';
+                                    
+                                    file_upload_video.value = '';
                                     $(file_upload_video).removeAttr('disabled','disabled');
-                                    $(event).removeClass('no-hover');
+                                    $(remove_video).hide();
+                                    video_file_name.innerHTML = 'لا يوجد ملفات';
 
                                     event.innerHTML = '<span>ارسال</span>'
+                                    $(event).removeAttr('disabled','disabled');
+                                    $(event).removeClass('no-hover');
                                 });
 
                                 return xhr;
                             },
                             success: function (response) {
-                                console.log('success');
+                                var modal_content = word.querySelector('.modal-content');
+                                console.log(response)
+                                console.log(word)
+                                modal_content.innerHTML = `
+                                    <div class="modal-content">
+                                        <div class="modal-header" style="display:flex; justify-content:center;color:#64697A;">
+                                            <h5 class="modal-title"  style="color:#3e3e3e">${response}</h5>
+                                        </div>
+                                        <div class="modal-body text-center p-lg" style="position: relative;background-image: url(${maze_url});">
+                                            <figure class="fs-1 px-2 py-3 text-center">
+                                                <blockquote class="display-2" style="display: flex;justify-content:center;align-items:center;">
+                                                    <span><img src="${gear_url}" style="width: 150px;" ></span>
+                                                </blockquote>
+                                                <blockquote class="blockquote" style="color:#3e3e3e">
+                                                    <p>يتم مراجعة اقتراحك في الوقت الحالي</p>
+                                                </blockquote>
+                                                <figcaption class="blockquote-footer text-muted" style="font-size: 70%;">
+                                                    سوف نخبرك فور قبول جميع المعلمين على اقتراحك
+                                                </figcaption>
+                                            </figure>
+                                        </div>
+                                    </div>
+                                `;
                             }
                         });
                     }else{
@@ -210,7 +250,9 @@ modal.forEach(function(event, index){
 
 search_input.addEventListener('input', function(event){
     var dropdownMenu = document.querySelector('.dropdownMenu');
+    
     dropdownMenu.innerHTML = '';
+    document.querySelector('.search-btn-form').value = search_input.value;
 
     if(search_input.value){
         $('.dropdownContainer').addClass('search-input-show');
@@ -224,15 +266,23 @@ search_input.addEventListener('input', function(event){
             success: function (response) {
                 dropdownMenu.innerHTML = '';
                 var output = JSON.parse(response);
-                if(output.length){
-                    for (let i = 0; i < output.length; i++) {
-                        const element = output[i];
-                        dropdownMenu.insertAdjacentHTML('beforeend', `<li><button class="no-sidebar-search" name="words_search" value="${element}"><i class="fas fa-chevron-left drop-icon" aria-hidden="true"></i><span>${element}</span></button></li>`)
-                    }
+                if(output.word.length || output.user.length){
+                        if(output.word.length){
+                            for (let j = 0; j < output.word.length; j++) {
+                                const element = output.word[j][0];
+                                dropdownMenu.insertAdjacentHTML('beforeend', `<li><button type="submit" class="no-sidebar-search" name="words_search" value="${element}"><i class="fas fa-chevron-left drop-icon" aria-hidden="true"></i><span>${element}</span></button></li>`)
+                            }
+                        }
+                        
+                        if(output.user && output.user.length){
+                            for (let j = 0; j < output.user.length; j++) {
+                                const element = output.user[j][0];
+                                dropdownMenu.insertAdjacentHTML('beforeend', `<li><button type="submit" class="no-sidebar-search" name="words_search" value="${element}"><i class="fas fa-user-tie drop-icon" aria-hidden="true"></i><span>${element}</span></button></li>`)
+                            }
+                        }
                 }else{
-                    $('.dropdownContainer').removeClass('search-input-show');
+                        $('.dropdownContainer').removeClass('search-input-show');
                 }
-
             }, error: function(response){
             }
         });

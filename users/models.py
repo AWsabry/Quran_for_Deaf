@@ -8,7 +8,7 @@ from users.utils import AccessTokenGenerator
 from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
 from django.utils.translation import gettext_lazy as _
-
+from Deaf_Website.validators import _ext_photo
 # Create your models here.
 
 class CustomUserManager(BaseUserManager):
@@ -66,7 +66,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     Age = models.CharField(max_length=10, default='', null=True, blank=True)
     PhoneNumber = models.CharField(max_length=20, null=True, blank=True)
     last_modified = models.DateTimeField(auto_now=True, null=True, blank=True)
-    ProfilePic = models.ImageField(upload_to="TeacherProfile/", null=True, blank=True)
+    ProfilePic = models.ImageField(upload_to="TeacherProfile/", null=True, blank=True, validators=[_ext_photo])
     Experience = models.TextField(blank=True, null=True)
     CV = models.FileField(upload_to="TeacherProfile/TeacherCV", null=True, blank=True)
     

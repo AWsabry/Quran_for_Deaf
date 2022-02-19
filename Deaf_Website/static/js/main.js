@@ -6,7 +6,7 @@ var words = document.querySelectorAll('.tabs-menu li a'),
     video_input_content = document.querySelectorAll('.video-input-content'),
     remove_video = document.querySelectorAll('.file_topic_upload .remove_video'),
     search_input = document.querySelector('.search-input'),
-    modal = document.querySelectorAll('.modal-footer button'),
+    modal = document.querySelectorAll('.word-upload-form'),
     modal_all = document.querySelectorAll('.modal-all');
 
 var vids = $(".video-thumb"); 
@@ -92,15 +92,17 @@ remove_video.forEach(function(video){
 });
 
 modal.forEach(function(event, index){
-    $(document).on('submit', event, function(e){
+    event.addEventListener('submit', function(e){
         e.preventDefault();
-        var modal_parent = event.parentElement.parentElement,
+
+        var modal_parent = event,
             file_upload_photo = modal_parent.querySelector('.file_upload_photo'),
             file_upload_video = modal_parent.querySelector('.file_upload_video'),
             file_image = file_upload_photo.files[0],
             file_video = file_upload_video.files[0];
         
-        const csrftoken = modal_parent.parentElement.querySelector('[name=csrfmiddlewaretoken]').value;
+        const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+        var btn_submit = event.querySelector('.modal-footer button');
 
         if(file_image || file_video){
             const data_dict = {'image':0, 'video':0};
@@ -116,8 +118,8 @@ modal.forEach(function(event, index){
                 headers: {'X-CSRFToken': csrftoken},
                 data: {'input':JSON.stringify(data_dict)},
                 beforeSend: function(){
-                    event.innerHTML = `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" style="margin-left: 7px"></span> <span> جاري التحقق </span>`;
-                    $(event).attr('disabled','disabled');
+                    btn_submit.innerHTML = `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" style="margin-left: 7px"></span> <span> جاري التحقق </span>`;
+                    $(btn_submit).attr('disabled','disabled');
                 },
                 success: function (response) {
                     var data = JSON.parse(response),
@@ -151,10 +153,9 @@ modal.forEach(function(event, index){
 
                         $(file_upload_photo).attr('disabled','disabled');
                         $(file_upload_video).attr('disabled','disabled');
-                        $(event).addClass('no-hover');
-
+                        $(btn_submit).addClass('no-hover');
                         var formDataFile = new FormData(),
-                            word = e.originalEvent.path[3];
+                            word = e.path[3];
                         
                         formDataFile.append('word', word.id.split('-')[word.id.split('-').length - 1])
                         formDataFile.append('image', file_image);
@@ -177,7 +178,7 @@ modal.forEach(function(event, index){
                                 xhr.upload.addEventListener('progress', function (e) {
                                     if (e.lengthComputable) {
                                         var percent = Math.round((e.loaded / e.total) * 100);
-                                        event.innerHTML = `<div class="uploud-bar" style="width: ${percent}%"><span>${percent}</span> %</div><span>... جاري الرفع</span>`;
+                                        btn_submit.innerHTML = `<div class="uploud-bar" style="width: ${percent}%"><span>${percent}</span> %</div><span>... جاري الرفع</span>`;
                                     }
                                 });
                                 upload_delete.addEventListener('click', function(){
@@ -205,17 +206,15 @@ modal.forEach(function(event, index){
                                     $(remove_video).hide();
                                     video_file_name.innerHTML = 'لا يوجد ملفات';
 
-                                    event.innerHTML = '<span>ارسال</span>'
-                                    $(event).removeAttr('disabled','disabled');
-                                    $(event).removeClass('no-hover');
+                                    btn_submit.innerHTML = '<span>ارسال</span>'
+                                    $(btn_submit).removeAttr('disabled','disabled');
+                                    $(btn_submit).removeClass('no-hover');
                                 });
 
                                 return xhr;
                             },
                             success: function (response) {
                                 var modal_content = word.querySelector('.modal-content');
-                                console.log(response)
-                                console.log(word)
                                 modal_content.innerHTML = `
                                     <div class="modal-content">
                                         <div class="modal-header" style="display:flex; justify-content:center;color:#64697A;">
@@ -239,8 +238,8 @@ modal.forEach(function(event, index){
                             }
                         });
                     }else{
-                        $(event).removeAttr('disabled','disabled');
-                        event.innerHTML = '<span>ارسال</span>'
+                        $(btn_submit).removeAttr('disabled','disabled');
+                        btn_submit.innerHTML = '<span>ارسال</span>'
                     }
                 }
             });

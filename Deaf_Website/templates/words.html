@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static deaf_tags %}
-{% block content %}
 
+{% block content %}
 <!-- Element Style -->
 <div class="popup-upload">
     {% if not request.user.is_anonymous %}
@@ -10,8 +10,7 @@
                 <div id="m-a-f-{{word.id}}" style="padding: 0;" class="modal modal-all fade" tabindex="-1" role="dialog" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered" role="document" style="margin: 30px auto;">
                         <div class="modal-content mx-3"> 
-                            <form method="GET" enctype="multipart/form-data">
-                                {% csrf_token %}
+                            <form class="word-upload-form" method="GET" enctype="multipart/form-data">
                                 {% if request.user|word_user_check:word %}
                                         <div class="modal-content">
                                             <div class="modal-header" style="display:flex; justify-content:center;color:#64697A;">
@@ -84,7 +83,8 @@
                                             </div>
                                             <div class="modal-footer" style="display: flex; justify-content:center; align-items: center; gap:20px;">
                                                 <div class="upload-delete"><i class="fa fa-trash"></i></div>
-                                                <button type="submit" class="btn btn-white" style="padding: 10px 40px;position:relative;opacity: 1 !important;">
+                                                <!-- <input type="submit" class="btn btn-white" name="words_upload" style="padding: 10px 40px;position:relative;opacity: 1 !important;" value="ارسال"> -->
+                                                <button type="submit"  class="btn btn-white" name="words_upload" style="padding: 10px 40px;position:relative;opacity: 1 !important;">
                                                     <span>ارسال</span>
                                                 </button>
                                             </div>
@@ -100,59 +100,20 @@
     {% endif %}
 </div>
 
-<!-- <div class="modal-dialog">
-    <form action="POST" enctype="multipart/form-data">
-        <div class="modal-content">
-            <div class="modal-header" style="display:flex; justify-content:center">
-                <h5 class="modal-title">{{word.name}}</h5>
-            </div>
-            <div class="modal-body text-center p-lg">
-                <div class="file_topic_upload">
-                    <div class="image_review" style="display: none;"></div>
-                    <div class="photo-input-content" style="display: flex; justify-content:center">
-                        <input type="file" class="file_upload_photo" id="img_topic_{{word.id}}" hidden="hidden" accept="image/jpeg">
-                        <div class="img_thing" style="display: block;margin-left: 15px; text-align: center;width: 141.6px;">
-                            <label for="img_topic_{{word.id}}" class="post_file_upload">اضافة صورة للمحتوى</label>
-                            <span class="photo_file_name" style="color: #a7a7a7; display: block;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">لا يوجد ملفات</span>
-                        </div>
-                        <div class="remove_image" style="display: none;">حذف الصورة</div>
-                    </div>
-                    <div class="check-list check-list-image"></div>
-                </div>
-                <div class="file_topic_upload">
-                    <div class="video-input-content" style="display: flex; justify-content:center">
-                        <input type="file" class="file_upload_video" id="video_topic_{{word.id}}" hidden="hidden" accept="video/*">
-                        <div class="img_thing" style="display: block;margin-left: 15px; text-align: center;width: 141.6px;">
-                            <label for="video_topic_{{word.id}}" class="post_file_upload">اضافة فيديو للمحتوى</label>
-                            <span class="video_file_name" style="color: #a7a7a7; display: block;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">لا يوجد ملفات</span>
-                        </div>
-                        <div class="remove_video" style="display: none;">حذف الفيديو</div>
-                    </div>
-                    <div class="check-list check-list-video" style="margin-right: 10px;"></div>
-                </div>
-            </div>
-            <div class="modal-footer" style="display: flex; justify-content:center">
-                <button type="button" class="btn btn-white" style="padding: 10px 40px;" disabled="disabled" autocomplete="off">إرسال</button>
-            </div>
-        </div>
-    </form>
-</div> -->
-
-
 
 <!-- Element Style -->
-<div class="breadcrumbs-three b-wh-text mb-5" style="background-image: url({% static 'images/pray.svg' %}); background-position-x: center;">
-    <div class="container">
-        <h2 class="page-title">كلمات القرآن الكريم بلغة الصم</h2>
+<div class="breadcrumbs-three b-wh-text mb-5" style="background-size: initial;background-image: url({% static 'images/pray2.svg' %});background-color: #f294a9;">
+    <div class="container" style="font-size:4vw">
+        <h2 class="page-title" style="font-size: 70%;">كلمات القرآن الكريم بلغة الصم</h2>
         <ul class="page-breadcrumbs">
-            <li><a href="/">الرئيسية</a></li>
-            <li><i class="fa fa-angle-left" aria-hidden="true"></i></li>
-            <li>كلمات القرآن الكريم</li>
+            <li style="font-size: 35%;"><a href="/">الرئيسية</a></li>
+            <li style="font-size: 35%;"><i class="fa fa-angle-left" aria-hidden="true"></i></li>
+            <li style="font-size: 35%;">كلمات القرآن الكريم</li>
         </ul>
-        <div class="page-words">تحتوي مكتبة الموقع على "<strong>{{word_all}} كلمة</strong>"</div>
+        <div class="page-words" style="font-size: 45%;">تحتوي مكتبة الموقع على "<strong>{{word_all}} كلمة</strong>"</div>
         {% if messages %}
             {% for message in messages %}
-                <div class="page-words" style="font-size: 27px; opacity:0.6;">{{message}}</div>
+                <div class="page-words" style="font-size: 38%; opacity:0.6;">{{message}}</div>
             {% endfor %}
         {% endif %}
     </div> <!-- /.container -->
@@ -208,7 +169,6 @@
                                                         </span>
                                                     </div>
                                                     <div class="date" style="font-size: 15px;">{{word.created|date:'j M, o'}}</div>
-                                                    
                                                 </div> <!-- /.user-comment-data -->
                                             </div>
                                         </div>
@@ -230,7 +190,7 @@
                                     <input class="search-input" type="text" placeholder="ابحث عن كلمة في القرآن الكريم أو عن معلم" style="min-width: 200px;" maxlength="70" {% if request.GET.words_search %}
                                         value="{{request.GET.words_search}}"
                                     {% endif %}>
-                                    <button type="submit" class="search-btn-form" name="words_search"><i class="fa fa-search" aria-hidden="true" tabindex="0"></i></button>
+                                    <button type="submit" class="search-btn-form" name="words_search"><i class="fa fa-search" aria-hidden="true"></i></button>
                                     <span class="dropdownContainer">
                                         <ul class="dropdownMenu">
                                         </ul>
@@ -246,9 +206,9 @@
                                     {% with request.GET.words_search as words_search %}
                                         {% if paginator and paginator.paginator.num_pages != 1 %}
                                             {% if paginator.has_next %}
-                                                <li><a href="{{paginator.next_page_number|get_url:words_search}}"><i class="flaticon-next"></i></a></li>
+                                                <li><a href="{{paginator.next_page_number|get_url:words_search}}" style="grid-area: onearrow;"><i class="flaticon-next"></i></a></li>
                                             {% endif %}
-                                            <div style="display: flex; direction: ltr;">
+                                            <div style="display: flex; direction: ltr;grid-area: paginate;">
                                                 {% for page in page_elibed %}
                                                     {% if page == paginator.number %}
                                                     <li class="active"><a href="{{page|get_url:words_search}}">{{page|convert_to_eastern_arabic}}</a></li>
@@ -262,7 +222,7 @@
                                                 {% endfor %}
                                             </div>
                                             {% if paginator.has_previous %}
-                                                <li><a href="{{paginator.previous_page_number|get_url:words_search}}"><i class="flaticon-back"></i></a></li>
+                                                <li tyle="grid-area: twoarrow;"><a href="{{paginator.previous_page_number|get_url:words_search}}"><i class="flaticon-back"></i></a></li>
                                             {% endif %}
                                         {% endif %}
                                     {% endwith %}

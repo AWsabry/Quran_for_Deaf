@@ -14,8 +14,8 @@ from users.utils import AccessTokenGenerator
 from users.thread import EmailThread
 from django.utils.translation import gettext as _
 from django.views.decorators.csrf import csrf_exempt
-from django.core.mail import EmailMessage
-
+from django.core.mail import EmailMessage, EmailMultiAlternatives
+from django.utils.html import strip_tags
 # Create your views here.
 
 def send_tracking(user):
@@ -36,13 +36,15 @@ def send_activate_mail(request, user):
         token, time_tosend = token_check(user)
         if token:
             domain = get_current_site(request)
-            subject = _('Activate user account')
+            subject = "تفعيل الحساب"
             body = render_to_string('activate.html', {
                 'user':user,
+                'protocol': 'https' if request.is_secure() else 'http',
                 'domain':domain,
                 'token':token,
             })
-            email = EmailMessage(subject, body, settings.EMAIL_HOST_USER, [user.email])
+            email = EmailMultiAlternatives(subject, strip_tags(body), settings.EMAIL_HOST_USER, [user.email])
+            email.attach_alternative(body, 'text/html')
             email.send()
             # EmailThread(subject, body, [user.email]).start()
             messages.success(request, _('There are an mail has been sent.'))

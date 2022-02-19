@@ -91,7 +91,7 @@ def approved_pre_add(sender, instance, action, **kwargs):
             
     if action == 'post_remove' or action == 'post_add':
 
-        teachers = CustomUser.objects.filter(Q(is_teacher=True) | Q(is_superuser=True))
+        teachers = CustomUser.objects.filter(Q(is_teacher=True, is_active=True) | Q(is_superuser=True))
         teachers_votes = instance.vote_approved.all() #approved
         
         # This will approve the post

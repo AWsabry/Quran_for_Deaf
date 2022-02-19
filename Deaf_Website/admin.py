@@ -80,11 +80,11 @@ class WordUserAdmin(admin.ModelAdmin):
                     obj.vote_teacher = False
             
             if request.user:
-                obj.teacher_approved = obj.vote_approved.exclude(is_superuser=True).count()
-                obj.teacher_denied = obj.vote_denied.exclude(is_superuser=True).count()
+                obj.teacher_approved = obj.vote_approved.filter(is_teacher=True, is_active=True).count()
+                obj.teacher_denied = obj.vote_denied.filter(is_teacher=True, is_active=True).count()
                 obj.teacher_num = CustomUser.objects.filter(is_teacher=True, is_active=True).count()
                 
-                teachers = CustomUser.objects.filter(Q(is_teacher=True) | Q(is_superuser=True))
+                teachers = CustomUser.objects.filter(Q(is_teacher=True, is_active=True) | Q(is_superuser=True))
                 teachers_votes = obj.vote_approved.all()
                 percentage = (teachers_votes.count()/teachers.count())*100 #teachers.difference(teachers_votes).count()
                 obj.vote_percentage = f'{round(percentage,1)} %'

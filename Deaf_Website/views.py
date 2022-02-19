@@ -13,6 +13,7 @@ from django.db.models import Q
 from django.db.models import Value
 from django.db.models.functions import Concat
 from django.contrib import messages
+from difflib import SequenceMatcher
 # Create your views here.
 
 def index(request):
@@ -27,16 +28,16 @@ def words(request):
     
     if user and user_words:
         words = Word.objects.filter(user__in=user)
-        messages.success(request, f'عدد نتائج البحث عن كلمة {words_search} هو {words.count()} نتيجة', extra_tags='searching')
+        messages.success(request, f'عدد نتائج البحث عن كلمة {words_search} هو "{words.count()}" نتيجة', extra_tags='searching')
     elif user and not user_words:
         words = Word.objects.all()
         if Word.objects.filter(name__icontains=words_search):
             words = Word.objects.filter(name__icontains=words_search)
-            messages.success(request, f'عدد نتائج البحث عن كلمة {words_search} هو {words.count()} نتيجة', extra_tags='searching')
+            messages.success(request, f'عدد نتائج البحث عن كلمة {words_search} هو "{words.count()}" نتيجة', extra_tags='searching')
         else:
             messages.success(request, f'لا يوجد منشورات لـ {user[0].first_name} {user[0].last_name}', extra_tags='searching')
     elif words:
-        messages.success(request, f'عدد نتائج البحث عن كلمة {words_search} هو {words.count()} نتيجة', extra_tags='searching')
+        messages.success(request, f'عدد نتائج البحث عن كلمة {words_search} هو "{words.count()}" نتيجة', extra_tags='searching')
     else:
         if hasattr(words, 'count'):
             messages.success(request, f'لا توجد نتائج لـ {words_search} التي تبحث عنها', extra_tags='searching')
@@ -129,14 +130,16 @@ def words_users_uploads(request):
 
 def words_search_ajax(request):
     input = request.GET.get('input')
-    user = CustomUser.objects.filter((Q(first_name__icontains=input) | Q(last_name__icontains=input)) & Q(is_teacher=True, is_active=True)).annotate(
+    user = CustomUser.objects.annotate(
         full_name=Concat('first_name',Value(' '), 'last_name')
-    ).values_list('full_name')
-    user_list = list(dict.fromkeys(user))[:5]
+    ).filter(is_active=True).distinct().values_list('full_name')
     
-    word = Word.objects.filter(name__icontains=input).values_list('name')
-    word_list = list(dict.fromkeys(word))[:5]
-    return HttpResponse(json.dumps({'user':user_list, 'word':word_list}))
+    user = sorted(user, key=lambda x: SequenceMatcher(lambda x: x == ' ', input, x[0]).ratio(), reverse=True)[:3]
+
+    word = Word.objects.all().distinct().values_list('name')
+    word = sorted(word, key=lambda x: SequenceMatcher(None, input, x[0]).ratio(), reverse=True)[:5]
+    
+    return HttpResponse(json.dumps({'user':user,'word':word}))
 
 
 def pdf(request):

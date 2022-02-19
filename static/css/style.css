@@ -8353,6 +8353,7 @@ font-weight:600;color: #fff;}
 .breadcrumbs-three {
   background-size: cover;
   background-repeat: no-repeat;
+  background-position-x: left;
   text-align: center;
   padding: 265px 0 150px;
   position: relative;
@@ -8361,7 +8362,6 @@ font-weight:600;color: #fff;}
 .breadcrumbs-three .page-title {
   font-family: 'Poppins', sans-serif;
   font-weight:600;
-  font-size: 60px;
   padding-bottom: 15px;
 }
 .breadcrumbs-three .page-breadcrumbs li {

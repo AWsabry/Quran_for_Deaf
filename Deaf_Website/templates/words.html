@@ -181,6 +181,11 @@
                                         {% include "opinion.html" %}
                                         {{word.description}}
                                     </div>
+                                {% else %}
+                                    <div class="content-upload">
+                                        {% include "opinion.html" %}
+                                        لا يوجد وصف لهذا المنشور
+                                    </div>
                                 {% endif %}
                             </div>
                         {% endfor %}

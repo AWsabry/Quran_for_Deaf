@@ -130,7 +130,7 @@ LOCALE_PATHS = [BASE_DIR / 'users/locale']
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [BASE_DIR / "static"]
+STATICFILES_DIRS = [BASE_DIR / "static", BASE_DIR / "users/static", BASE_DIR / "Deaf_Website/static"]
 MEDIA_ROOT = BASE_DIR / "uploads"
 MEDIA_URL = "/uploads/"
 

@@ -1,6 +1,7 @@
 from django import template
 
 from Deaf_Website.models import Word, WordUser
+from django.db.models import Q
 
 register = template.Library()
 
@@ -32,4 +33,16 @@ def word_check(user, word):
     check = True if Word.objects.filter(user=user, word_attach=word) else False
     
     print(check)
+    return check
+
+@register.filter
+def word_user_vote_check(user, word):
+    check = False
+    
+    if Word.objects.filter(id=word, user_agree=user):
+        check = 'agree'
+        
+    if Word.objects.filter(id=word ,user_disagree=user):
+        check = 'disagree'
+    
     return check

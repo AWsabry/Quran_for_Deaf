@@ -141,6 +141,22 @@ def words_search_ajax(request):
     
     return HttpResponse(json.dumps({'user':user,'word':word}))
 
+@csrf_exempt
+def user_word_vote(request):
+    word = request.POST.get('word')
+    vote = request.POST.get('vote')
+    print(vote)
+    print(Word.objects.filter(Q(id=int(word)) & (~Q(user_agree=request.user) & ~Q(user_disagree=request.user))))
+    if Word.objects.filter(Q(id=int(word)) & (~Q(user_agree=request.user) & ~Q(user_disagree=request.user))):
+        if vote == 'agree':
+            Word.objects.filter(id=int(word))[0].user_agree.add(request.user)
+            
+            return HttpResponse('agree')
+        elif vote == 'disagree':
+            Word.objects.filter(id=int(word))[0].user_disagree.add(request.user)
+            return HttpResponse('disagree')
+    
+    return HttpResponse('No')
 
 def pdf(request):
     return render(request, "pdf.html")

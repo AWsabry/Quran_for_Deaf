@@ -27,7 +27,7 @@
 				<div class="col-12">
 					<div class="input-group">
 						{% render_field form.email %}
-						<label>الإيميل - Email</label>
+						<label>الإيميل</label>
 						{% if form.errors.email %}
 							<svg class="error_signup" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15px" height="13px" viewBox="0 0 15 13" version="1.1" data-tooltip-color="red" data-toggle="tooltip" data-placement="left" data-html="true" title="{{form.errors.email.as_text}}">
 								<!-- Generator: sketchtool 53 (72520) - https://sketchapp.com -->
@@ -50,7 +50,7 @@
 					<div class="col">
 						<div class="input-group">
 							{% render_field form.first_name%}
-							<label>الإسم الأول - Firstname</label>
+							<label>الإسم الأول</label>
 							{% if form.errors.first_name %}
 							<svg class="error_signup" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15px" height="13px" viewBox="0 0 15 13" version="1.1" data-tooltip-color="red" data-toggle="tooltip" data-placement="left" data-html="true" title="{{form.errors.first_name.as_text}}">
 								<!-- Generator: sketchtool 53 (72520) - https://sketchapp.com -->
@@ -72,7 +72,7 @@
 					<div class="col">
 						<div class="input-group">
 							{% render_field form.last_name %}
-							<label>الإسم الأخير - Lastname</label>
+							<label>الإسم الأخير</label>
 							{% if form.errors.last_name %}
 							<svg class="error_signup" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15px" height="13px" viewBox="0 0 15 13" version="1.1" data-tooltip-color="red" data-toggle="tooltip" data-placement="left" data-html="true" title="{{form.errors.last_name.as_text}}">
 								<!-- Generator: sketchtool 53 (72520) - https://sketchapp.com -->
@@ -95,7 +95,7 @@
 				<div class="col-12">
 					<div class="input-group">
 						{% render_field form.password1 %}
-						<label>كلمة السر - Password</label>
+						<label>كلمة السر</label>
 						{% if form.errors.password1 %}
 						<svg class="error_signup" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15px" height="13px" viewBox="0 0 15 13" version="1.1" data-tooltip-color="red" data-toggle="tooltip" data-placement="left" data-html="true" title="{{form.errors.password1.as_text}}">
 							<!-- Generator: sketchtool 53 (72520) - https://sketchapp.com -->
@@ -117,7 +117,7 @@
 				<div class="col-12">
 					<div class="input-group">
 						{% render_field form.password2 %}
-						<label>تأكيد كلمة السر - Password Confirmation</label>
+						<label>تأكيد كلمة السر</label>
 						{% if form.errors.password2 %}
 							<svg class="error_signup" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15px" height="13px" viewBox="0 0 15 13" version="1.1" data-tooltip-color="red" data-toggle="tooltip" data-placement="left" data-html="true" title="{{form.errors.password2.as_text}}">
 								<!-- Generator: sketchtool 53 (72520) - https://sketchapp.com -->
@@ -136,17 +136,28 @@
 						{% endif %}
 					</div> <!-- /.input-group -->
 				</div> <!-- /.col- -->
-				<div class="col-12">
+				<div class="col-12" style="z-index: 2">
 					<div class="input-group">
-						{% render_field form.country class='theme-select-menu ' %}
+						<select multiple data-placeholder="إختَر من هذه الإجابات" autocomplete="off" name="answers">
+							<option value="1">انا أصم.</option>
+							<option value="2">اختص بالتعامل مع الصم.</option>
+							<option value="3">لدي شخص من عائلتي أصم.</option>
+						</select>
+						<span style="font-size: 13px;"> سوف تؤثر اختياراتك لهذا الخيار على تجربتك، لذا اختَر بمصداقية. (يمكنك اختيار اكثر من خيار) </span>
+					</div> <!-- /.input-group -->
+				</div> <!-- /.col- -->
+				<div class="col-12" style="z-index: 1">
+					<div class="input-group">
+						{% render_field form.country class='theme-select-menu' %}
 					</div> <!-- /.input-group -->
 				</div> <!-- /.col- -->
 			</div> <!-- /.row -->
-			<div class="agreement-checkbox">
+
+			{% comment %} <div class="agreement-checkbox">
 				<input type="checkbox" id="agreement">
 				<label for="agreement">{% trans "I agree to the terms and policy from the rogan inc." %}</label>
-			</div>
-			<button class="line-button-one">تسجيل - Register</button>
+			</div> {% endcomment %}
+			<button class="line-button-one">تسجيل</button>
 		</form>
 		<p class="signUp-text text-center">لديك حساب ؟ <a href="{% url 'login' %}">ادخل الآن</a>.</p>
 	</div> <!-- /.sign-up-form-wrapper -->

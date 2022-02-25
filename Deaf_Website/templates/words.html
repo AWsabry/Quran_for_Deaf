@@ -145,7 +145,7 @@
                     <div class="content-main" style="background: none !important;">
                         <!-- Graphics -->
                         {% for word in paginator %}
-                            <div class="z-content-pad">
+                            <div class="z-content-pad" style="overflow:visible">
                                 <div class="blog-details">
                                     <div class="blog-details-fg">
                                         <div class="user-comment-area content-info">
@@ -178,6 +178,7 @@
                                 </div>
                                 {% if word.description %}
                                     <div class="content-upload">
+                                        {% include "opinion.html" %}
                                         {{word.description}}
                                     </div>
                                 {% endif %}

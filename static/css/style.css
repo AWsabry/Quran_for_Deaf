@@ -6941,7 +6941,9 @@ font-weight:600;text-decoration: underline;}
   margin-bottom: 10px
 }
 .content-upload{
-  padding: 20px 30px;
+  min-height: 21px;
+  position: relative;
+  padding: 20px 20px 20px 85px;
   background: #f9f9f9 !important;
   margin-top: 10px
 }
@@ -8126,8 +8128,12 @@ font-weight:600;color: #fff;}
   cursor: pointer;
 }
 .signUp-page .selectize-dropdown .option {font-size: 14px;color: #1a1a1a;line-height: 22px;}
+
+
+
+
 .signUp-page .selectize-dropdown .option:hover,
-.signUp-page .selectize-dropdown .active {color: #fff; background:#1a1a1a; }
+.signUp-page .selectize-dropdown .active {color: #fff; background:#ff3a46 !important; }
 .signUp-page .selectize-control.single .selectize-input:after {left: 8px;}
 .signUp-page .acType-content h4 {font-size: 28px;}
 .signUp-page .acType-content p {padding: 8px 0 25px;}
@@ -8240,6 +8246,7 @@ font-weight:600;color: #fff;}
   text-transform: capitalize;
 }
 .content-main{
+  overflow: visible !important;
   grid-area: content;
   min-height: fit-content !important;
 }
@@ -8953,6 +8960,7 @@ Modal animation
   grid-area: mobile;
 }
 .pagination{
+  overflow: visible !important;
   grid-area: pagination;
 }
 .pagination > .container > .pd-footer{
@@ -9440,6 +9448,17 @@ html[lang="ru"] .op-menu-one .ct-language__dropdown li a[data-lang="ru"] {color:
   font-weight: 500;
   line-height: 105px;
   color: #161616;
+}
+.opinion-form-text{
+  display: flex !important;
+  flex-direction: column !important;
+  padding: 20px 5px !important;
+  font-size: 18px !important;
+  color: #fff !important;
+  line-height: 28px !important;
+  text-align: center !important;
+  justify-content: center !important;
+  align-items: center !important;
 }
 .op-banner-one .main-title span {position: relative;}
 .op-banner-one .main-title span:before {

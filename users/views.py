@@ -1,3 +1,4 @@
+from random import choice
 from django.http.response import HttpResponse
 from django.shortcuts import render, redirect
 from django.template.loader import render_to_string
@@ -55,19 +56,23 @@ def send_activate_mail(request, user):
 @csrf_exempt
 def signup(request):
     if request.method == 'POST':
+        choices = ['question_one', 'question_two', 'question_three']
         form = CustomUserForm(request.POST)
         email = form.data.get('email')
         first_name, last_name = form.data.get('first_name'), form.data.get('last_name')
         password = form.data.get('password1')
         country = form.data.get('country')
-        
+        answers = {}
+        questions = [answers.update({choices[int(answer) -1]:True}) for answer in request.POST.getlist('answers')] if request.POST.getlist('answers') else None
+        print(answers)
         if form.is_valid():
             user = CustomUser.objects.create_user(
                 email=email,
                 first_name=first_name,
                 last_name=last_name,
                 password=password,
-                country=country
+                country=country,
+                **(answers or {})
             )
             send_activate_mail(request, user)
             return redirect('login')

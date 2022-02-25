@@ -17,11 +17,18 @@ class WordAdmin(admin.ModelAdmin):
         self.fieldsets = [
             (None, {"fields": (
                 'user', 'name', 'slug', 'description', 'image', 'video', 'active', 'updated', 'created'
-            )})]
+            )}),
+            ('Users Vote', {'fields':(
+                'user_agree_count','user_disagree_count'
+            )})
+            ]
         
         if obj:
             if obj.word_attach:
                 self.fieldsets.append(('Attached Word', {'fields': ('word_attach',)}))
+            
+            obj.user_agree_count = obj.user_agree.all().count()
+            obj.user_disagree_count = obj.user_disagree.all().count()
         
         return self.fieldsets
     
@@ -36,11 +43,11 @@ class WordAdmin(admin.ModelAdmin):
     def get_readonly_fields(self, request, obj=None):
         obj = obj.user if obj else request.user
         if request.user.is_superuser:
-            return self.readonly_fields + ('slug', 'updated', 'created', 'word_attach')
+            return self.readonly_fields + ('slug', 'updated', 'created', 'word_attach', 'user_agree_count','user_disagree_count')
         if  request.user == obj:
-            return self.readonly_fields + ('slug','active', 'updated', 'created', 'word_attach')
+            return self.readonly_fields + ('slug','active', 'updated', 'created', 'word_attach', 'user_agree_count','user_disagree_count')
         else:
-            return self.readonly_fields + ('user', 'name', 'slug', 'description', 'image', 'video', 'active', 'updated', 'created', 'word_attach')        
+            return self.readonly_fields + ('user', 'name', 'slug', 'description', 'image', 'video', 'active', 'updated', 'created', 'word_attach', 'user_agree_count','user_disagree_count')        
 
 @admin.register(WordUser)
 class WordUserAdmin(admin.ModelAdmin):

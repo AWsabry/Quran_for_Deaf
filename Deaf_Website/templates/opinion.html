@@ -1,0 +1,45 @@
+{% load deaf_tags %}
+
+{% if not request.user.is_anonymous %}
+    {% if not request.user.is_superuser and not request.user.is_teacher%}
+        {% if request.user.question_one or request.user.question_two or request.user.question_three %}
+            <div id="gmg-side-popup" class="gmg-side-popup">
+                <div class="gmg-sp-close icon-plus"><svg viewBox="0 0 819 1024"><g><path d="M381.258 921.502v-381.26h-381.26v-56.483h381.26v-381.26h56.483v381.26h381.26v56.483h-381.26v381.26h-56.483z"></path></g></svg></div>
+                <div class="gmg-sp-header">
+                    <div class="gmg-sp-ballon icon-ballon">
+                        <svg viewBox="0 0 1208 1024"><g transform=""><path d="M0 1.614v776.362h575.083l244.41 244.41v-244.41h388.181v-776.362h-1207.674zM43.131 44.745h1121.411v690.099h-373.804v215.656l-201.279-215.656h-546.329v-690.099z"></path></g></svg>
+                    </div>
+                    <h3 class="title">رأيك يهمنا</h3>
+                </div>
+                {% if not request.user|word_user_vote_check:word.id %}
+                    <form id="opinion-form" method="POST" data-word="{{word.id}}">
+                        {% csrf_token %}
+                        <div class="gmg-sp-content"> 
+                            <button class="gmg-sp-button appt" name="agree">
+                                <i class="fas fa-check icon"></i>
+                                <span class="desc">موافق على المنشور</span>
+                            </button>
+                            <button class="gmg-sp-button" name="disagree">
+                                <i class="fas fa-exclamation icon"></i>
+                                <span class="desc">لست موافق على المنشور</span>
+                            </button>
+                        </div>
+                    </form>
+                {% elif request.user|word_user_vote_check:word.id == 'agree' %}
+                    <form id="opinion-form" method="POST" data-word="{{word.id}}">
+                        <div class="opinion-form-text">
+                            <span> لقد <strong>وافقت</strong> على هذا المنشور، شكرا لإبداء رأيك.</span>
+                        </div>
+                    </form>
+                {% elif request.user|word_user_vote_check:word.id == 'disagree' %}
+                    <form id="opinion-form" method="POST" data-word="{{word.id}}">
+                        <div class="opinion-form-text">
+                            <span> لقد <strong>اعترضت</strong> على هذا المنشور، شكرا لإبداء رأيك.</span>
+                            <span data-target="#m-a-f-{{word.id}}" data-toggle="modal" class="modal-button" style="text-decoration: underline;font-size:13px;opacity:0.65"><strong>اقترح</strong> منشور اخر اللآن</span>
+                        </div>
+                    </form>
+                {% endif %}
+            </div> 
+        {% endif %}
+    {% endif %}
+{% endif %}

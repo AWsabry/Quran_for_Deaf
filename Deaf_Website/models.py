@@ -34,6 +34,11 @@ class Word(models.Model):
     updated = models.DateTimeField(auto_now=True, null=True)
     created = models.DateTimeField(auto_now_add=True, null=True)
     word_attach = models.OneToOneField('Word', on_delete=models.CASCADE, null=True)
+    user_agree = models.ManyToManyField(CustomUser, related_name='user_agree',blank=True)
+    user_disagree = models.ManyToManyField(CustomUser, related_name='user_disagree', blank=True)
+    
+    user_agree_count = models.PositiveIntegerField(default=0)
+    user_disagree_count = models.PositiveIntegerField(default=0)
 
     def slug_make(self):
         value = re.sub(r'[^\w\s-]', '', f'{self.name.lower()}-{self.id}')
@@ -59,7 +64,7 @@ class WordUser(models.Model):
     vote_denied = models.ManyToManyField(to=CustomUser, related_name='vote_denied_relate', blank=True)
     vote_approved = models.ManyToManyField(to=CustomUser, related_name='vote_approved_relate', blank=True)
     vote_nothing = models.ManyToManyField(to=CustomUser, related_name='vote_nothing_relate', blank=True)
-    vote_teacher = models.BooleanField(blank=False)
+    vote_teacher = models.BooleanField(blank=False, null=True)
     vote_percentage = models.CharField(max_length=100, blank=True)
     teacher_approved = models.IntegerField(null=True)
     teacher_denied = models.IntegerField(null=True)

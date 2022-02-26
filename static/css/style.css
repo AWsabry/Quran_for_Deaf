@@ -5481,6 +5481,9 @@ body .solid-button-one:hover,.navbar .navbar-toggler,.faq-tab-wrapper .faq-panel
 .theme-sidebar-widget .sidebar-search {height: 60px;position: relative;}
 .theme-sidebar-widget .sidebar-search input {
   width: 100%;
+  width: -moz-available;
+  width: -webkit-fill-available;
+  width: stretch;
   height: 100%;
   border: 1px solid #f9f9f9;
   padding: 0 25px 0 50px;

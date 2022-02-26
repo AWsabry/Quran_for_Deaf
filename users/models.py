@@ -61,7 +61,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
     is_teacher = models.BooleanField(default=False)
-    country = CountryField(blank_label=_('(select country)'), null=True, blank=True)
+    country = CountryField(blank_label=_('(select country)'), null=True)
     date_joined = models.DateTimeField(auto_now_add=True, null=True)
     Age = models.CharField(max_length=10, default='', null=True, blank=True)
     PhoneNumber = models.CharField(max_length=20, null=True, blank=True)

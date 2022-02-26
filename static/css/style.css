@@ -8101,7 +8101,7 @@ font-weight:600;color: #fff;}
   transition: all 0.3s ease-in-out;
 }
 .signUp-page form .input-group input:focus ~ label,
-.signUp-page form .input-group input:valid ~ label {top: -12px;}
+.signUp-page form .input-group input:valid ~ label {top: -12px !important;}
 .signUp-page form .input-group input:focus {border-color: #393939;}
 .signUp-page form .input-group input:focus,
 .signUp-page form .input-group input:valid {padding-top: 18px;}

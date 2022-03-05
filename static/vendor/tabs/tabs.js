@@ -2075,13 +2075,17 @@
             }
            
             _base.$container.addClass(ANIMATINGCLASS);
+            var container = _tabElement.contentInner.prevObject.prevObject.prevObject[0];
+            $(container).css({"overflow":"hidden"});
             _tabElement.preContent.css({ "position": "absolute", "display": "block", "left": 0, "top": 0 });
             _tabElement.content.css({ "position": "absolute", "display": "block" });
 
             return _base;
         },
         after: function (_base, _tabElement) {
+            var container = _tabElement.contentInner.prevObject.prevObject.prevObject[0];
             setTimeout(function () {
+                $(container).css({"overflow":"unset"});
                 _tabElement.content.css({ "position": "relative" });
                 _tabElement.preContent.css({ "display": "none" });
             }, _tabElement.duration);

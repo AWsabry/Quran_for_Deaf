@@ -8249,7 +8249,6 @@ font-weight:600;color: #fff;}
   text-transform: capitalize;
 }
 .content-main{
-  overflow: visible !important;
   grid-area: content;
   min-height: fit-content !important;
 }
@@ -8775,6 +8774,9 @@ Modal animation
 .z-tabs > ul.z-tabs-nav > li.z-disabled {
     filter: alpha(opacity=45);
     opacity: .45;
+}
+.z-container > .z-content.z-active{
+  overflow: visible;
 }
 .z-tabs > ul.z-tabs-nav > li.z-disabled a {cursor: default;}
 .theme-tab .z-container {border-top:1px solid rgba(0,0,0,0.07);}

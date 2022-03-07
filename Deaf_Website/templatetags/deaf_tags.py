@@ -28,8 +28,6 @@ def word_user_check(user, word):
 
 @register.filter
 def word_check(user, word):
-    print(user)
-    print(word.slug)
     check = True if Word.objects.filter(user=user, word_attach=word) else False
     
     print(check)

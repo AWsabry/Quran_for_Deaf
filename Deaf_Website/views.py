@@ -117,15 +117,15 @@ def words_users(request):
 @ensure_csrf_cookie
 def words_users_uploads(request):
     word = Word.objects.filter(id=int(request.POST.get('word')))[0]
-    image = request.FILES.get('image')
-    video = request.FILES.get('video')
+    image = request.FILES.get('image') if request.POST.get('image_check') else False
+    video = request.FILES.get('video') if request.POST.get('video_check') else False
 
-    if image or video:
+    if image != None and video != None:
         if not WordUser.objects.filter(user=request.user, word=word):
             WordUser.objects.create(user=request.user,
                                     word=word,
-                                    image=image,
-                                    video=video)
+                                    image=image if image else None,
+                                    video=video if video else None)
         
     return HttpResponse(word.name)
 
@@ -146,8 +146,7 @@ def words_search_ajax(request):
 def user_word_vote(request):
     word = request.POST.get('word')
     vote = request.POST.get('vote')
-    print(vote)
-    print(Word.objects.filter(Q(id=int(word)) & (~Q(user_agree=request.user) & ~Q(user_disagree=request.user))))
+
     if Word.objects.filter(Q(id=int(word)) & (~Q(user_agree=request.user) & ~Q(user_disagree=request.user))):
         if vote == 'agree':
             Word.objects.filter(id=int(word))[0].user_agree.add(request.user)

@@ -160,9 +160,17 @@ modal.forEach(function(event, index){
                         }else{
                             var word = e.originalTarget.parentElement.parentElement.parentElement;
                         }
-                        formDataFile.append('word', word.id.split('-')[word.id.split('-').length - 1])
-                        formDataFile.append('image', file_image);
+
+                        if(file_video){
+                            formDataFile.append('video_check', 1);
+                        }
+                        if(file_image){ 
+                            formDataFile.append('image_check', 1);
+                        }
+
+                        formDataFile.append('word', word.id.split('-')[word.id.split('-').length - 1]);
                         formDataFile.append('video', file_video);
+                        formDataFile.append('image', file_image);
 
                         var xhr_ajax = $.ajax({
                             type: "POST",

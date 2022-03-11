@@ -670,7 +670,6 @@
 
 @media (max-width: 480px) {
   .logout{display: none !important;}
-  .logout-list{display: flex !important;}
   .breadcrumbs-three .container{font-size:14vw !important}
   .pagination > .container ul > div li a{font-size: 17px;}
   .pagination > .container ul{display: grid !important;grid-template-areas:'paginate paginate''onearrow twoarrow';}
@@ -696,6 +695,7 @@
 @media (max-width: 430px) {
   .photo-input-content, .video-input-content{flex-direction: column; align-items: center;}
   .tab-resp {grid-template-areas: 'filter filter' 'mobile mobile' 'nav nav' 'content content' 'pagination pagination' !important;}
+  .logout-list{display: flex !important;}
   .theme-menu-one .contact-us {display: none;}
   .theme-menu-two .quote-button {width: 135px;left: 90px;}
   .shop-details .procuct-details .product-info .wishlist-button {display: block;margin-top: 15px;}

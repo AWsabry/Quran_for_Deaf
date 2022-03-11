@@ -180,6 +180,10 @@
   clear: both;
 }
 
+html, body{
+  overflow-x: hidden !important;
+}
+
 .ds{
   background: url("") center no-repeat;
 }

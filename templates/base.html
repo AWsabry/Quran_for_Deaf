@@ -102,6 +102,10 @@
 									<li class="nav-item dropdown">
 										<a class="nav-link logout-list" href="{% url 'logout' %}">تسجيل خروج <i class="icon flaticon-back"></i></a>
 									</li>
+								{% else %}
+									<li class="nav-item dropdown">
+										<a class="nav-link logout-list" href="{% url 'login' %}">تسجيل دخول <i class="icon flaticon-back"></i></a>
+									</li>
 								{% endif %}
 						   </ul>
 					   </div>

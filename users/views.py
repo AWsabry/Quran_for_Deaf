@@ -11,6 +11,7 @@ from users.forms import CustomUserForm
 from django.contrib import messages
 from django.contrib.sites.shortcuts import get_current_site
 from django.contrib.auth import authenticate, logout as user_logout, login as user_login
+from django.contrib.auth.base_user import BaseUserManager
 from users.utils import AccessTokenGenerator
 from users.thread import EmailThread
 from django.utils.translation import gettext as _
@@ -87,7 +88,7 @@ def signup(request):
 @csrf_exempt
 def login(request):
     if request.method == 'POST' and 'login_btn' in request.POST:
-        email = request.POST.get('email')
+        email = BaseUserManager.normalize_email(request.POST.get('email'))
         password = request.POST.get('password')
         user = authenticate(request, email=email, password=password)
         if user:

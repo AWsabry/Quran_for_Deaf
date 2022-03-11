@@ -154,9 +154,12 @@ modal.forEach(function(event, index){
                         $(file_upload_photo).attr('disabled','disabled');
                         $(file_upload_video).attr('disabled','disabled');
                         $(btn_submit).addClass('no-hover');
-                        var formDataFile = new FormData(),
-                            word = e.path[3];
-                        
+                        var formDataFile = new FormData();
+                        if(!e.originalTarget){
+                            var word = e.path[3];
+                        }else{
+                            var word = e.originalTarget.parentElement.parentElement.parentElement;
+                        }
                         formDataFile.append('word', word.id.split('-')[word.id.split('-').length - 1])
                         formDataFile.append('image', file_image);
                         formDataFile.append('video', file_video);
@@ -179,16 +182,16 @@ modal.forEach(function(event, index){
                                     if (e.lengthComputable) {
                                         var percent = Math.round((e.loaded / e.total) * 100);
                                         btn_submit.innerHTML = `<div class="uploud-bar" style="width: ${percent}%"><span>${percent}</span> %</div><span>... جاري الرفع</span>`;
+                                        console.log(percent);
                                     }
                                 });
-                                upload_delete.addEventListener('click', function(){
+                                upload_delete.addEventListener('click', function(e){
                                     xhr.abort();
                                     var image_review = word.querySelector('.image_review'),
                                         remove_image = word.querySelector('.remove_image'),
                                         remove_video = word.querySelector('.remove_video'),
                                         photo_file_name = word.querySelector('.photo_file_name'),
                                         video_file_name = word.querySelector('.video_file_name');
-
                                     
                                     $(upload_delete).hide();
 
@@ -209,11 +212,13 @@ modal.forEach(function(event, index){
                                     btn_submit.innerHTML = '<span>ارسال</span>'
                                     $(btn_submit).removeAttr('disabled','disabled');
                                     $(btn_submit).removeClass('no-hover');
+                                
                                 });
 
                                 return xhr;
                             },
                             success: function (response) {
+                                console.log(response)
                                 var modal_content = word.querySelector('.modal-content');
                                 modal_content.innerHTML = `
                                     <div class="modal-content">

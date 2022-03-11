@@ -120,11 +120,12 @@ def words_users_uploads(request):
     image = request.FILES.get('image')
     video = request.FILES.get('video')
 
-    if not WordUser.objects.filter(user=request.user, word=word):
-        WordUser.objects.create(user=request.user,
-                                word=word,
-                                image=image,
-                                video=video)
+    if image or video:
+        if not WordUser.objects.filter(user=request.user, word=word):
+            WordUser.objects.create(user=request.user,
+                                    word=word,
+                                    image=image,
+                                    video=video)
         
     return HttpResponse(word.name)
 

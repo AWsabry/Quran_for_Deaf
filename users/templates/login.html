@@ -1,8 +1,8 @@
-{% extends 'base/auth_base.html' %}
+{% extends 'base.html' %}
 {% load i18n %}
 
-{% block main_content %}
-<div class="signUp-page signUp-minimal pt-50 pb-100">
+{% block content %}
+<div class="signUp-page signUp-minimal" style="padding-top: 200px;">
     <div class="shape-wrapper">
         <span></span>
         <span></span>
@@ -21,19 +21,19 @@
         </div>
         {% endfor %}
         {% endif %}
-        <form method='POST' id="login-form">
+        <form method='POST' id="login-form" novalidate>
             {% csrf_token %}
             <div class="row">
                 <div class="col-12">
                     <div class="input-group">
-                        <input type="email" name="email" required>
-                        <label>الإيميل - Email</label>
+                        <input type="text" name="email" required>
+                        <label>الإيميل</label>
                     </div> <!-- /.input-group -->
                 </div> <!-- /.col- -->
                 <div class="col-12">
                     <div class="input-group">
                         <input type="password" name="password" required>
-                        <label>كلمة السر - Password</label>
+                        <label>كلمة المرور</label>
                     </div> <!-- /.input-group -->
                 </div> <!-- /.col- -->
             </div> <!-- /.row -->
@@ -45,4 +45,4 @@
         <p class="signUp-text text-center">ليس لديك حساب ؟ <a href="{% url 'signup' %}">سجل الآن</a></p>
     </div> <!-- /.sign-up-form-wrapper -->
 </div> <!-- /.signUp-page -->
-{% endblock main_content %}
+{% endblock content %}

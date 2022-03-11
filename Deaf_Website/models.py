@@ -26,7 +26,7 @@ class Word(models.Model):
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.PROTECT, null=True)
     name = models.CharField(max_length=250, blank=True, null=True)
-    slug = models.SlugField(unique=True, db_index=True, null=True)
+    # slug = models.SlugField(unique=True, db_index=True, null=True)
     description = models.TextField(blank=True, null=True)
     image = models.ImageField(upload_to=UploadFiles('Words', 'photo'), blank=True, validators=[_ext_photo], null=True)
     video = models.FileField(upload_to=UploadFiles('Words', 'video'), blank=True, validators=[_ext_video], null=True)
@@ -40,9 +40,9 @@ class Word(models.Model):
     user_agree_count = models.PositiveIntegerField(default=0)
     user_disagree_count = models.PositiveIntegerField(default=0)
 
-    def slug_make(self):
-        value = re.sub(r'[^\w\s-]', '', f'{self.name.lower()}-{self.id}')
-        return re.sub(r'[-\s]+', '-', value).encode('utf-8').decode().strip('-_')
+    # def slug_make(self):
+    #     value = re.sub(r'[^\w\s-]', '', f'{self.name.lower()}-{self.id}')
+    #     return re.sub(r'[-\s]+', '-', value).encode('utf-8').decode().strip('-_')
     
     def clean(self):
         if not (self.video or self.image):
@@ -52,7 +52,7 @@ class Word(models.Model):
         super().save(*args, **kwargs)
     
     def __str__(self):
-        return f'{self.name}-{self.id}'
+        return u'%s-%d' % (self.name, self.id)
 
 
 class WordUser(models.Model):
@@ -81,7 +81,7 @@ class WordUser(models.Model):
 def word_postsave(sender, instance, created, **kwargs):
     update_fields = kwargs['update_fields']
     obj = sender.objects.filter(id=instance.id)
-    obj.update(slug=obj[0].slug_make())
+    # obj.update(slug=obj[0].slug_make())
 
 @receiver(m2m_changed, sender=WordUser.vote_approved.through)
 def approved_pre_add(sender, instance, action, **kwargs):

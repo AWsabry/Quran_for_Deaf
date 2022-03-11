@@ -126,7 +126,7 @@
         <div class="row">
             <div class="col-lg">
                 <!-- The value of data-role should be z-tabs, data-options is optional to set options -->
-                <div id='theme-tab-seven' style="display:grid; grid-template-areas: '. filter' 'nav content' '. pagination'; grid-column-gap: 10px; grid-template-columns: min-content auto;" class="theme-tab-solid icon-style theme-tab tab-resp" data-role='z-tabs' data-options='{"theme": "silver", "orientation": "vertical", "animation": {"duration": 400, "effects": "slideV"}}'>
+                <div id='theme-tab-seven' style="display:grid; grid-template-areas: '. filter' 'nav content' '. pagination'; grid-column-gap: 10px; grid-template-columns: auto 1fr;" class="theme-tab-solid icon-style theme-tab tab-resp" data-role='z-tabs' data-options='{"theme": "silver", "orientation": "vertical", "animation": {"duration": 400, "effects": "slideV"}}'>
                     <!-- Tab Navigation Menu -->
                         {% csrf_token %}
                         <ul class="tabs-menu clearfix" style="grid-area: nav;">
@@ -142,6 +142,20 @@
                             {% endfor %}
                         </ul>
                     <!-- Content container -->
+                    <form method="GET" style="grid-area:filter;">
+                        <span class="theme-sidebar-widget" style="margin-bottom: 30px;display:grid; grid-template-columns: 100%">
+                                <span class="sidebar-search">
+                                    <input class="search-input" type="text" placeholder="ابحث عن كلمة في القرآن الكريم أو عن معلم" style="min-width: 200px;" maxlength="70" {% if request.GET.words_search %}
+                                        value="{{request.GET.words_search}}"
+                                    {% endif %}>
+                                    <button type="submit" class="search-btn-form" name="words_search"><i class="fa fa-search" aria-hidden="true"></i></button>
+                                    <span class="dropdownContainer">
+                                        <ul class="dropdownMenu">
+                                        </ul>
+                                    </span>
+                                </span>
+                        </span>
+                    </form>
                     <div class="content-main" style="background: none !important;overflow:visible;">
                         <!-- Graphics -->
                         {% for word in paginator %}
@@ -190,20 +204,6 @@
                             </div>
                         {% endfor %}
                     </div>
-                    <form method="GET" style="grid-area:filter;">
-                        <span class="theme-sidebar-widget" style="margin-bottom: 30px;display:grid; grid-template-columns: 100%">
-                                <span class="sidebar-search">
-                                    <input class="search-input" type="text" placeholder="ابحث عن كلمة في القرآن الكريم أو عن معلم" style="min-width: 200px;" maxlength="70" {% if request.GET.words_search %}
-                                        value="{{request.GET.words_search}}"
-                                    {% endif %}>
-                                    <button type="submit" class="search-btn-form" name="words_search"><i class="fa fa-search" aria-hidden="true"></i></button>
-                                    <span class="dropdownContainer">
-                                        <ul class="dropdownMenu">
-                                        </ul>
-                                    </span>
-                                </span>
-                        </span>
-                    </form>
                     <!-- Element Style -->
                     <span class="element-section pagination">
                         <div class="container">

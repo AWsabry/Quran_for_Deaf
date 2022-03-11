@@ -116,6 +116,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGES = [
     ('ar', 'Arabic'),
+    ('en', 'English'),
 ]
 
 LANGUAGE_CODE = 'ar'

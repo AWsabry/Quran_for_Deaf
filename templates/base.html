@@ -5,9 +5,11 @@
 		<meta charset="UTF-8">
 		<meta name="keywords" content="Digital marketing agency, Digital marketing company, Digital marketing services">
 		<meta name="author" content="creativegigs">
-		<meta name="description" content="Rogan creative multipurpose is a beautiful website template designed for SEO & Digital Agency websites.">
+		<meta name="description" content="هذه المنصة صممت للتواصل مع الصم عن طريق لغة مشتركة بينهما
+و يتضمن الموقع فيديوهات شرح لكلمات القران عن طريق لغة الإشارة
+كما أنه يتضمن المصحف بلغة التهجّي الإصبعي.ريم للصم">
 		
-		<meta name='og:image' content={% static "images/home/ogg.png"%}>
+	<meta name='og:image' content="{% static "images/logo/01.png"%}">
         
 		<!-- For IE -->
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -22,15 +24,13 @@
 		<meta name="apple-mobile-web-app-status-bar-style" content="#233D63">
 		<title>قرآن الصم</title>
 		<!-- Favicon -->
-		<link rel="icon" type="image/png" sizes="56x56" href="{% static "images/logo/01.png"%}">
+		<link rel="icon" type="image/png" sizes="56x56" href="{% static "/images/logo/01.png"%}">
 
 		<link rel="stylesheet" type="text/css" href="{% static "css/pure-tabs.css" %}">
-		<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-
 		<!-- Main style sheet -->
 		<link rel="stylesheet" type="text/css" href="{% static "css/style.css" %}">
 		<link rel="stylesheet" type="text/css" href="{% static "css/multiple.css" %}">
-
+        
 		<!-- responsive style sheet -->
 		<link rel="stylesheet" type="text/css" href="{% static "css/responsive.css" %}">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -84,29 +84,74 @@
 					   <div class="collapse navbar-collapse" id="navbarSupportedContent">
 					   		<ul class="navbar-nav">
 							    <li class="nav-item active dropdown">
-							    	<a href="{% url 'Deaf_Website:index' %}" class="nav-link dropdown-toggle">الرئيسية.</a> 
+							    	<a href="{% url 'Deaf_Website:index' %}" class="nav-link">الرئيسية</a> 
 							    </li>
 							    <li class="nav-item dropdown position-relative">
-						            <a class="nav-link dropdown-toggle" href="{% url 'Deaf_Website:pdf' %}">القرآن للصم.</a>
+						            <a class="nav-link" href="{% url 'Deaf_Website:pdf' %}">القرآن للصم</a>
 						        </li>
 						        <li class="nav-item dropdown position-relative">
-						            <a class="nav-link dropdown-toggle" href="{% url 'Deaf_Website:words' %}">كلمات القرآن للصم.</a>
+						            <a class="nav-link" href="{% url 'Deaf_Website:words' %}">كلمات القرآن للصم</a>
 						        </li>
                                 <li class="nav-item dropdown position-relative">
-						            <a class="nav-link dropdown-toggle" href="{% url 'Deaf_Website:Quran_Platform' %}">منصة تحفيظ القرآن للصم.</a>
+						            <a class="nav-link" href="{% url 'Deaf_Website:Quran_Platform' %}">منصة تحفيظ القرآن للصم</a>
 						        </li>
 						        <li class="nav-item dropdown">
-						            <a class="nav-link dropdown-toggle" href="#">من نحن ؟</a>
-						            
+						            <a class="nav-link" href="#">من نحن ؟</a>
 						        </li>
-							   
+								{% if not request.user.is_anonymous %}
+									<li class="nav-item dropdown">
+										<a class="nav-link logout-list" href="{% url 'logout' %}">تسجيل خروج <i class="icon flaticon-back"></i></a>
+									</li>
+								{% endif %}
 						   </ul>
 					   </div>
 					</div> <!-- /.container -->
 				</nav> <!-- /#mega-menu-holder -->
 				<div class="header-right-widget">
 					<ul>
-						<li><a href="/signup" class="contact-us white-shdw-button">تسجيل<i class="icon flaticon-back"></i></a></li>
+						{% if request.user.is_anonymous %}
+							<li><a href="{% url 'login' %}" class="contact-us white-shdw-button">تسجيل دخول<i class="icon flaticon-back"></i></a></li>
+						{% else %}
+							<li class="language-switcher">
+								<div class="dropdown">
+									<button type="button" class="dropdown-toggle" data-toggle="dropdown">
+										الملف الشخصي
+									</button>
+									<div class="dropdown-menu dropdown-menu-right logoutContent">
+										<ul class="ct-language__dropdown">
+											<li class="logoutinner">
+												<div class="nasted-header">
+													<span>البريد الإلكتروني</span>
+													<span style="white-space: break-spaces;word-break: break-all;">{{request.user.email}}</span>
+												</div>
+												<i class="fa fa-envelope"></i>
+											</li>
+											<li class="logoutinner">
+												<div class="nasted-header">
+													<span>إسم المستخدم</span>
+													<span style="white-space: break-spaces;word-break: break-word;">{{request.user.first_name}} {{request.user.last_name}}</span>
+												</div>
+												<i class="fa fa-user"></i>
+											</li>
+											<li class="logoutinner">
+												<div class="nasted-header">
+													<span>حالة المستخدم</span>
+													{% if request.user.is_superuser %}
+														<span>مشرف</span>
+													{% elif request.user.is_teacher %}
+														<span>معلم</span>
+													{% else %}
+														<span>مستفيد</span>
+													{% endif %}
+												</div>
+												<i class="fas fa-user-gear"></i>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</li>
+							<li class="logout"><a href="{% url 'logout' %}" class="contact-us white-shdw-button">تسجيل خروج<i class="icon flaticon-back"></i></a></li>
+						{% endif %}
 					</ul>
 				</div> <!-- /.header-right-widget -->
 			</div> <!-- /.theme-main-menu -->
@@ -127,38 +172,30 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-3 col-sm-6 col-12 about-widget" data-aos="fade-up">
-                    <a href="index.html" class="logo"><img src="{% static 'images/logo/logo2.svg' %}" alt=""></a>
-                    <a href="mailto:fekra.house.innovation@gmail.com" class="email">fekra.house.innovation@gmail.com</a>
+                    <a href="index.html" class="logo"><img src="{% static 'images/shape/logo_v1.svg' %}" alt="logo"
+                    width="200" height="70"></a>
+                    <a href="mailto:quranfordeaf@gmail.com" class="email">quranfordeaf@gmail.com</a>
                     
                     
                 </div> <!-- /.about-widget -->
                 <div class="col-lg-3 col-lg-3 col-sm-6 col-12 footer-list" data-aos="fade-up">
-                    <h5 class="title">Services</h5>
+                    <h5 class="title">من نحن ؟ </h5>
                     <ul>
-                        <li><a href="#">Web Design</a></li>
-                        <li><a href="#">Development</a></li>
-                        <li><a href="#">Wordpress</a></li>
-                        <li><a href="#">Online Marketing</a></li>
-                        <li><a href="#">Content</a></li>
+                        <li><a href="#">اعرف عنا أكثر</a></li>
                     </ul>
                 </div> <!-- /.footer-recent-post -->
                 <div class="col-lg-3 col-sm-6 col-12 footer-list" data-aos="fade-up">
-                    <h5 class="title">About us</h5>
+                    <h5 class="title">تواصل معنا</h5>
                     <ul>
-                        <li><a href="about-us-standard.html">About us</a></li>
-                        <li><a href="project-standard.html">Work Portfolio</a></li>
-                        <li><a href="team-standard.html">Team</a></li>
-                        <li><a href="#">Plan & Pricing</a></li>
-                        <li><a href="blog-default.html">News</a></li>
+                        <li><a href="mailto:quranfordeaf@gmail.com">تواصل معنا</a></li>
                     </ul>
                 </div> <!-- /.footer-list -->
                 <div class="col-lg-3 col-lg-2 col-sm-6 col-12 footer-information" data-aos="fade-up">
-                    <h5 class="title">Our Address</h5>
+                    <h5 class="title">مواقعنا</h5>
                     <p></p>
                     <ul>
                         <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
                         <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                        <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
                     </ul>
                 </div>
             </div> <!-- /.row -->
@@ -168,9 +205,9 @@
     <div class="container">
         <div class="bottom-footer">
             <div class="clearfix">
-                <p>&copy;جميع الحقوق محفوظة لشركة بيت الفكرة 2022 </p>
+                <p>&copy; جميع الحقوق محفوظة لشركة بيت الفكرة 2022 </p>
                 <ul>
-                    <li><a href="#">سياسةالخصوصية.</a></li>
+                    <li><a href="#">سياسة الخصوصية.</a></li>
                 </ul>
             </div>
         </div> <!-- /.bottom-footer -->
@@ -192,9 +229,11 @@
 	    <!-- menu  -->
 		<script src="{% static 'vendor/mega-menu/assets/js/custom.js' %}"></script>
 		<!-- js ui -->
-		<script src="{% static 'vendor/jquery-ui/jquery-ui.min.js'" %}></script>
+		<script src="{% static 'vendor/jquery-ui/jquery-ui.min.js' %}"></script>
 		<!-- Select js -->
 		<script src="{% static 'vendor/selectize.js/selectize.min.js' %}"></script>
+
+		<script src="{% static 'js/multiple.js' %}"></script>
 		<!-- AOS js -->
 		<script src="{% static 'vendor/aos-next/dist/aos.js' %}"></script>
 		<!-- WOW js -->
@@ -206,22 +245,12 @@
 		<script src="{% static 'vendor/jquery.countTo.js' %}"></script>
 		<!-- Fancybox -->
 		<script src="{% static 'vendor/fancybox/dist/jquery.fancybox.min.js' %}"></script>
+		<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 		<!-- isotop -->
 		<script  src="{% static 'vendor/isotope.pkgd.min.js' %}"></script>
 
-		<link href="http://vjs.zencdn.net/4.2/video-js.css" rel="stylesheet">
-		<script src="http://vjs.zencdn.net/4.2/video.js"></script>
-
-		<script>
-			var maze_url = "{% static 'images/maze.svg' %}";
-			var gear_url = "{% static 'images/gear.svg' %}";
-			let user = "{{request.user.id}}";
-		</script>
-		
 		<script src="{% static 'js/main.js' %}"></script>
 		<script src="{% static 'js/text.js' %}"></script>
-		<script src="{% static 'js/multiple.js' %}"></script>
-
 		
 		<script src="{% static 'vendor/tabs/tabs.js' %}"></script>
 		<script src="https://cdn.jsdelivr.net/npm/less@4.1.1" ></script>
@@ -230,5 +259,10 @@
 		<script src="{% static 'js/lang.js' %}"></script>
 		<script src="{% static 'js/theme.js' %}"></script>
 		</div> <!-- /.main-page-wrapper -->
+
+	<script>
+		var maze_url = "{% static 'images/maze.svg' %}",
+			gear_url = "{% static 'images/gear.svg' %}"
+	</script>
 	</body>
 </html>

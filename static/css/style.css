@@ -4738,6 +4738,73 @@ body .solid-button-one:hover,.navbar .navbar-toggler,.faq-tab-wrapper .faq-panel
   border: 1px solid rgba(255,255,255,0.2);
   border-radius: 3px;
 }
+.overflow-text{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.logoutContent{
+  display: none;
+  width: 250px !important;
+  padding: 15px 15px !important;
+  height: auto !important;
+  background-color: #fff !important;
+  box-shadow: 0 7px 14px rgba(50, 50, 93, .1), 0 3px 6px rgba(0, 0, 0, .08) !important;
+  z-index: 1;
+}
+.logout-list{
+  display: none !important;
+  align-items: center !important;
+  justify-content: right !important;
+  direction: ltr !important;
+  gap: 15px !important;
+  cursor: pointer;
+  transition: 0.2s ease-in-out !important;
+}
+.logout-list:hover{
+  opacity: 70%;
+}
+.logout-list i{
+  font-size: 18px;
+  color: #FF605E !important;
+}
+.logoutinner{
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  direction: ltr;
+  gap: 15px;
+  padding: 5px 0 5px 0;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+}
+.logoutinner:hover{
+  opacity: 70%;
+}
+.logoutinner h2{
+  font-size: 16px;
+}
+.logoutinner i{
+  font-size: 18px;
+  color: #FF605E;
+}
+.logoutinner:not(:last-child){
+  border-bottom: 1px solid rgb(236, 236, 236);
+}
+.logoutinner:first-child{
+  padding: 0 0 5px 0 !important;
+}
+.logoutinner:last-child{
+  padding: 5px 0 0 0 !important;
+}
+.nasted-header{
+  display: flex;
+  flex-direction: column;
+}
+.nasted-header span:nth-child(1){
+  font-size: 13px;
+  opacity: 0.4;
+}
 .why-choose-us-app .text-wrapper .bottom-title {
   font-size: 24px;
   line-height: 34px;

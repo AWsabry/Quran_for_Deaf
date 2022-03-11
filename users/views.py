@@ -10,7 +10,7 @@ from users.decorators import auth_users_not_access
 from users.forms import CustomUserForm
 from django.contrib import messages
 from django.contrib.sites.shortcuts import get_current_site
-from django.contrib.auth import authenticate, login as user_login
+from django.contrib.auth import authenticate, logout as user_logout, login as user_login
 from users.utils import AccessTokenGenerator
 from users.thread import EmailThread
 from django.utils.translation import gettext as _
@@ -119,4 +119,10 @@ def activate_user(request, token):
     else:
         messages.error(request, 'لم نتمكن من ايجاد هذا الرابط، حاول مرة اخرى', extra_tags='danger')
     
+    return redirect('login')
+
+def logout(request):
+    
+    user_logout(request)
+    messages.success(request, 'تم تسجيل الخروج بنجاح')
     return redirect('login')

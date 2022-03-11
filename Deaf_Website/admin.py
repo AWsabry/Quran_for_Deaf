@@ -8,15 +8,15 @@ from django.db.models import Q
 @admin.register(Word)
 class WordAdmin(admin.ModelAdmin):
     model = Word
-    list_display = ('id','name', 'slug' , 'active', 'created')
-    list_display_links = ('name',)
+    list_display = ('id','name' , 'word_attach', 'active', 'created')
+    list_display_links = ('name', 'word_attach')
     list_filter = ('user', 'user__is_teacher', 'user__is_superuser', 'name', 'active', 'created')
     list_editable = ('active',)
     
     def get_fieldsets(self, request, obj=None):
         self.fieldsets = [
             (None, {"fields": (
-                'user', 'name', 'slug', 'description', 'image', 'video', 'active', 'updated', 'created'
+                'id', 'user', 'name', 'description', 'image', 'video', 'active', 'updated', 'created'
             )}),
             ('Users Vote', {'fields':(
                 'user_agree_count','user_disagree_count'
@@ -43,11 +43,11 @@ class WordAdmin(admin.ModelAdmin):
     def get_readonly_fields(self, request, obj=None):
         obj = obj.user if obj else request.user
         if request.user.is_superuser:
-            return self.readonly_fields + ('slug', 'updated', 'created', 'word_attach', 'user_agree_count','user_disagree_count')
+            return self.readonly_fields + ('id','updated', 'created', 'word_attach', 'user_agree_count','user_disagree_count')
         if  request.user == obj:
-            return self.readonly_fields + ('slug','active', 'updated', 'created', 'word_attach', 'user_agree_count','user_disagree_count')
+            return self.readonly_fields + ('id','active', 'updated', 'created', 'word_attach', 'user_agree_count','user_disagree_count')
         else:
-            return self.readonly_fields + ('user', 'name', 'slug', 'description', 'image', 'video', 'active', 'updated', 'created', 'word_attach', 'user_agree_count','user_disagree_count')        
+            return self.readonly_fields + ('id','user', 'name', 'description', 'image', 'video', 'active', 'updated', 'created', 'word_attach', 'user_agree_count','user_disagree_count')        
 
 @admin.register(WordUser)
 class WordUserAdmin(admin.ModelAdmin):

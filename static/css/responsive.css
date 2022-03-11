@@ -406,7 +406,7 @@
 
 
 @media (max-width: 767px) {
-  .tab-resp {grid-template-areas: 'filter filter' 'nav content' '. pagination' !important;}
+  .tab-resp {grid-template-areas: '. filter' 'nav content' '. pagination' !important;}
   .pt-150 {padding-top: 100px;} .pb-200 {padding-bottom: 150px;} .mt-200 {margin-top: 150px;}
   #theme-banner-one .illustration,.agn-contact-banner .title br {display: none;}
   .theme-title-one .main-title,.agn-contact-banner .title,#theme-banner-four .main-wrapper .main-title,#theme-banner-five .main-title,
@@ -669,6 +669,8 @@
 
 
 @media (max-width: 480px) {
+  .logout{display: none !important;}
+  .logout-list{display: flex !important;}
   .breadcrumbs-three .container{font-size:14vw !important}
   .pagination > .container ul > div li a{font-size: 17px;}
   .pagination > .container ul{display: grid !important;grid-template-areas:'paginate paginate''onearrow twoarrow';}

@@ -1,248 +1,34 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="ar" dir='rtl'>
-	<head>
-		<meta charset="UTF-8">
-		<meta name="keywords" content="Digital marketing agency, Digital marketing company, Digital marketing services">
-		<meta name="author" content="creativegigs">
-		<meta name="description" content="Rogan creative multipurpose is a beautiful website template designed for SEO & Digital Agency websites.">
-		
-		<meta name='og:image' content={% static "images/home/ogg.png"%}>
-        
-		<!-- For IE -->
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<!-- For Resposive Device -->
-		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		<!-- For Window Tab Color -->
-		<!-- Chrome, Firefox OS and Opera -->
-		<meta name="theme-color" content="#233D63">
-		<!-- Windows Phone -->
-		<meta name="msapplication-navbutton-color" content="#233D63">
-		<!-- iOS Safari -->
-		<meta name="apple-mobile-web-app-status-bar-style" content="#233D63">
-		<title>قرآن الصم</title>
-		<!-- Favicon -->
-		<link rel="icon" type="image/png" sizes="56x56" href="{% static "images/logo/01.png"%}">
 
-		<link rel="stylesheet" type="text/css" href="{% static "css/pure-tabs.css" %}">
-		<!-- Main style sheet -->
-		<link rel="stylesheet" type="text/css" href="{% static "css/style.css" %}">
-        
-		<!-- responsive style sheet -->
-		<link rel="stylesheet" type="text/css" href="{% static "css/responsive.css" %}">
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-        
-
-		<!-- Fix Internet Explorer ______________________________________-->
-		<!--[if lt IE 9]>
-			<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-			<script src="vendor/html5shiv.js"></script>
-			<script src="vendor/respond.js"></script>
-		<![endif]-->	
-	</head>
-
-	<body>
-		<div class="main-page-wrapper">
-
-			<!-- ===================================================
-				Loading Transition
-			==================================================== -->
-			<!-- Preloader -->
-			<section>
-				<div id="preloader">
-					<div id="ctn-preloader" class="ctn-preloader">
-						<div class="animation-preloader">
-							<div class="spinner"></div>
-							<div class="txt-loading">
-								<span data-text-preloader="قرآن الصم" class="letters-loading">
-									قرآن الصم
-								</span>
-							</div>
-						</div>	
-					</div>
-				</div>
-			</section>
-
-			<!-- 
-			=============================================
-				Theme Main Menu
-			============================================== 
-			-->
-			<div class="theme-main-menu theme-menu-one">
-				<div class="logo"><a href="/"><img src="{% static "images/logo/01.png"%}" alt=""></a></div>
-                
-				<nav id="mega-menu-holder" class="navbar navbar-expand-lg">
-					<div  class="container nav-container">
-						<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-					        <i class="flaticon-setup"></i>
-					    </button>
-					   <div class="collapse navbar-collapse" id="navbarSupportedContent">
-					   		<ul class="navbar-nav">
-							    <li class="nav-item active dropdown">
-							    	<a href="{% url 'Deaf_Website:index' %}" class="nav-link dropdown-toggle">الرئيسية.</a> 
-							    </li>
-							    <li class="nav-item dropdown position-relative">
-						            <a class="nav-link dropdown-toggle" href="{% url 'Deaf_Website:pdf' %}">القرآن للصم.</a>
-						        </li>
-						        <li class="nav-item dropdown position-relative">
-						            <a class="nav-link dropdown-toggle" href="{% url 'Deaf_Website:words' %}">كلمات القرآن للصم.</a>
-						        </li>
-                                <li class="nav-item dropdown position-relative">
-						            <a class="nav-link dropdown-toggle" href="{% url 'Deaf_Website:Quran_Platform' %}">منصة تحفيظ القرآن للصم.</a>
-						        </li>
-						        <li class="nav-item dropdown">
-						            <a class="nav-link dropdown-toggle" href="#">من نحن ؟</a>
-						            
-						        </li>
-							   
-						   </ul>
-					   </div>
-					</div> <!-- /.container -->
-				</nav> <!-- /#mega-menu-holder -->
-				<div class="header-right-widget">
-					<ul>
-						<li><a href="/signup" class="contact-us white-shdw-button">تسجيل<i class="icon flaticon-back"></i></a></li>
-					</ul>
-				</div> <!-- /.header-right-widget -->
-			</div> <!-- /.theme-main-menu -->
-
-			<div id="theme-banner-one">
-				<div class="illustration wow zoomIn animated" data-wow-delay="1s" data-wow-duration="2s">
-					<img src="{% static "images/shape/logo_v1.png"%}" alt="">
-					
-				</div>
-				<img src="{% static "images/shape/oval-1.svg"%}" alt="" class="oval-one">
-				<img src="{% static "images/shape/shape-1.svg"%}" alt="" class="shape-three">
-				<img src=" {% static "images/shape/shape-55.svg"%}" alt="" class="shape-four">
-				
-				<img src="{% static "images/shape/shape-56.svg"%}" alt="" class="shape-five">
-				
-				<img src="{% static "images/shape/shape-57.svg"%}" alt="" class="shape-six">
-				<img src="{% static "images/shape/shape-58.svg"%}" alt="" class="shape-seven">
-				<img src="{% static "images/shape/shape-59.svg"%}" alt="" class="shape-eight">
-				<img src="{% static "images/shape/shape-60.svg"%}" alt="" class="shape-nine">
-				<img src="{% static "images/shape/shape-61.svg"%}" alt="" class="shape-ten">
-				<img src="{% static "images/shape/shape-62.svg"%}" alt="" class="shape-eleven">
-				<div class="container">
-					<div class="main-wrapper">
-						<h1 class="main-title wow fadeInUp animated" data-wow-delay="0.4s">قريبًا منصة تحفيظ كاملة<br>للصم.</h1>
-						<p class="sub-title wow fadeInUp animated" data-wow-delay="0.9s">هذه المنصة صممت لتمكين الصم لحفظ القرآن الكريم <br> والتواصل مع الأصحاء ....</p>
-						<ul class="button-group lightgallery">
-							<li><a href="about-us-standard.html" class="more-button solid-button-one wow fadeInRight animated" data-wow-delay="1.5s">المزيد عنا<i class="fa fa-angle-left icon-right" aria-hidden="true"></i></a></li>
+{% block content %}
+	<div id="theme-banner-one">
+		<div class="illustration wow zoomIn animated" data-wow-delay="1s" data-wow-duration="2s">
+			<img src="{% static "images/shape/logo_v1.png"%}" alt="">
 			
-							<li><a data-fancybox href="https://www.youtube.com/watch?v=naR1CJPQw6c" class="fancybox video-button-one wow fadeInLeft animated" data-wow-delay="1.5s">شرح فيديو <i class="flaticon-play-button icon-right"></i></a></li>
-						</ul>
-					</div> <!-- /.main-wrapper -->
-				</div> <!-- /.container -->
-			</div> <!-- /#theme-banner-one -->
-			
-			
-
-
-            {% block content %}{% endblock content %}
-
-
-
-            <!--
-=====================================================
-    Footer
-=====================================================
--->
-<footer class="theme-footer-one">
-    <div class="shape-one" data-aos="zoom-in-right"></div>
-    <img src="{% static 'images/shape/shape-67.svg' %}" alt="" class="shape-two">
-    <div class="top-footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3 col-sm-6 col-12 about-widget" data-aos="fade-up">
-                    <a href="index.html" class="logo"><img src="{% static 'images/logo/logo2.svg' %}" alt=""></a>
-                    <a href="#" class="email">boga.inc@company.com</a>
-                    <a href="#" class="phone">720.661.2231</a>
-                    
-                </div> <!-- /.about-widget -->
-                <div class="col-lg-3 col-lg-3 col-sm-6 col-12 footer-list" data-aos="fade-up">
-                    <h5 class="title">Services</h5>
-                    <ul>
-                        <li><a href="#">Web Design</a></li>
-                        <li><a href="#">Development</a></li>
-                        <li><a href="#">Wordpress</a></li>
-                        <li><a href="#">Online Marketing</a></li>
-                        <li><a href="#">Content</a></li>
-                    </ul>
-                </div> <!-- /.footer-recent-post -->
-                <div class="col-lg-3 col-sm-6 col-12 footer-list" data-aos="fade-up">
-                    <h5 class="title">About us</h5>
-                    <ul>
-                        <li><a href="about-us-standard.html">About us</a></li>
-                        <li><a href="project-standard.html">Work Portfolio</a></li>
-                        <li><a href="team-standard.html">Team</a></li>
-                        <li><a href="#">Plan & Pricing</a></li>
-                        <li><a href="blog-default.html">News</a></li>
-                    </ul>
-                </div> <!-- /.footer-list -->
-                <div class="col-lg-3 col-lg-2 col-sm-6 col-12 footer-information" data-aos="fade-up">
-                    <h5 class="title">Our Address</h5>
-                    <p>00 Orville Road Apt. 728 <br>California, USA</p>
-                    <ul>
-                        <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                        <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                        <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
-                    </ul>
-                </div>
-            </div> <!-- /.row -->
-        </div> <!-- /.container -->
-    </div> <!-- /.top-footer -->
-    
-    <div class="container">
-        <div class="bottom-footer">
-            <div class="clearfix">
-                <p>&copy; 2019 copyright all right reserved</p>
-                <ul>
-                    <li><a href="#">Privace & Policy.</a></li>
-                    <li><a href="faq.html">Faq.</a></li>
-                    <li><a href="#">Terms.</a></li>
-                </ul>
-            </div>
-        </div> <!-- /.bottom-footer -->
-    </div>
-</footer> <!-- /.theme-footer-one -->	
-		<!-- 
-		=============================================
-			Theme Main Banner One
-		============================================== 
-		-->
-
-    	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    	<!-- jQuery -->
-		<script src="{% static 'vendor/jquery.2.2.3.min.js' %}"></script>
-		<!-- Popper js -->
-		<script src="{% static 'vendor/popper.js/popper.min.js' %}"></script>
-		<!-- Bootstrap JS -->
-		<script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
-	    <!-- menu  -->
-		<script src="{% static 'vendor/mega-menu/assets/js/custom.js' %}"></script>
-		<!-- AOS js -->
-		<script src="{% static 'vendor/aos-next/dist/aos.js' %}"></script>
-		<!-- WOW js -->
-		<script src="{% static 'vendor/WOW-master/dist/wow.min.js' %}"></script>
-		<!-- owl.carousel -->
-		<script src="{% static 'vendor/owl-carousel/owl.carousel.min.js' %}"></script>
-		<!-- js count to -->
-		<script src="{% static 'vendor/jquery.appear.js' %}"></script>
-		<script src="{% static 'vendor/jquery.countTo.js' %}"></script>
-		<!-- Fancybox -->
-		<script src="{% static 'vendor/fancybox/dist/jquery.fancybox.min.js' %}"></script>
+		</div>
+		<img src="{% static "images/shape/oval-1.svg"%}" alt="" class="oval-one">
+		<img src="{% static "images/shape/shape-1.svg"%}" alt="" class="shape-three">
+		<img src=" {% static "images/shape/shape-55.svg"%}" alt="" class="shape-four">
 		
-		<script src="{% static 'js/main.js' %}"></script>
-		<script src="{% static 'js/text.js' %}"></script>
+		<img src="{% static "images/shape/shape-56.svg"%}" alt="" class="shape-five">
 		
-		<script src="{% static 'vendor/tabs/tabs.js' %}"></script>
-		<script src="https://cdn.jsdelivr.net/npm/less@4.1.1" ></script>
-
-		<!-- Theme js -->
-		<script src="{% static 'js/lang.js' %}"></script>
-		<script src="{% static 'js/theme.js' %}"></script>
-		</div> <!-- /.main-page-wrapper -->
-	</body>
-</html>
+		<img src="{% static "images/shape/shape-57.svg"%}" alt="" class="shape-six">
+		<img src="{% static "images/shape/shape-58.svg"%}" alt="" class="shape-seven">
+		<img src="{% static "images/shape/shape-59.svg"%}" alt="" class="shape-eight">
+		<img src="{% static "images/shape/shape-60.svg"%}" alt="" class="shape-nine">
+		<img src="{% static "images/shape/shape-61.svg"%}" alt="" class="shape-ten">
+		<img src="{% static "images/shape/shape-62.svg"%}" alt="" class="shape-eleven">
+		<div class="container">
+			<div class="main-wrapper">
+				<h1 class="main-title wow fadeInUp animated" data-wow-delay="0.4s">قريبًا منصة تحفيظ كاملة<br>للصم.</h1>
+				<p class="sub-title wow fadeInUp animated" data-wow-delay="0.9s">هذه المنصة صممت لتمكين الصم لحفظ القرآن الكريم <br> والتواصل مع الأصحاء ....</p>
+				<ul class="button-group lightgallery">
+					<li><a href="about-us-standard.html" class="more-button solid-button-one wow fadeInRight animated" data-wow-delay="1.5s">المزيد عنا</li>
+	
+					<li><a data-fancybox href="https://www.youtube.com/watch?v=naR1CJPQw6c" class="fancybox video-button-one wow fadeInLeft animated" data-wow-delay="1.5s">شرح فيديو <i class="flaticon-play-button icon-right"></i></a></li>
+				</ul>
+			</div> <!-- /.main-wrapper -->
+		</div> <!-- /.container -->
+	</div> <!-- /#theme-banner-one -->
+{% endblock content %}
